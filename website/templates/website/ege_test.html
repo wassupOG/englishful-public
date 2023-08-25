@@ -1,0 +1,361 @@
+{% extends "website/layout.html" %} {% block title %}Тестовая часть ЕГЭ{% endblock %} {% load static %} {% block body %}
+<form data-test-form style="font-size: 16px; margin: 0px" autocomplete="off" method="POST" action="{% url 'ege_check' ege_testname=test.ege_testname %}">
+  {% csrf_token %} {% comment %} Timer {% endcomment %}
+  <div id="countdown-timer"></div>
+  <a href="#" id="pause-button">Пауза</a>
+
+  {% comment %} Listening {% endcomment %}
+  <div class="center">
+    <audio src="{% static 'website/audio/ege/' %}{{test.listening_path}}" controls onplay="this.controls=false" preload="auto" volume="1.0"></audio>
+  </div>
+
+  <ol>
+    {% comment %} #1 {% endcomment %}
+    <li>
+      Вы услышите 6 высказываний. Установите соответствие между высказываниями каждого говорящего <b>A–F</b> и утверждениями, данными в списке <b>1–7</b>. Используйте каждое утверждение, обозначенное
+      соответствующей цифрой, только один раз. В задании есть одно лишнее утверждение. Вы услышите запись дважды. Занесите свои ответы в таблицу.
+    </li>
+    <div class="info-left">
+      {% for item in test.listening_1 %}
+      <div>{{item}}</div>
+      {% endfor %}
+    </div>
+
+    <table class="ege-table">
+      <thead>
+        <tr>
+          <th>Говорящий</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Утверждение</td>
+          <td><input maxlength="1" type="text" size="1" name="1_1st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="2_1st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="3_1st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="4_1st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="5_1st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="6_1st_answers" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="hr-faint" />
+    {% comment %} #2 {% endcomment %}
+    <li>
+      Вы услышите диалог. Определите, какие из приведённых утверждений <b>А–G</b> соответствуют содержанию текста <b>(1 – True)</b>, какие не соответствуют <b>(2 – False)</b> и о чём в тексте не
+      сказано, то есть на основании текста нельзя дать ни положительного, ни отрицательного ответа <b>(3 – Not stated)</b>. Занесите номер выбранного Вами варианта ответа в таблицу. Вы услышите запись
+      дважды.
+    </li>
+    <div class="info-left">
+      {% for item in test.listening_2 %}
+      <div>{{item}}</div>
+      {% endfor %}
+    </div>
+
+    <table class="ege-table">
+      <thead>
+        <tr>
+          <th>Говорящий</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+          <th>G</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Утверждение</td>
+          <td><input maxlength="1" type="text" size="1" name="1_2st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="2_2st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="3_2st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="4_2st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="5_2st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="6_2st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="7_2st_answers" /></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <hr class="hr-faint" />
+    {% comment %} #3-9 {% endcomment %}
+    <div class="margin-bottom">
+      Вы услышите интервью. В заданиях <b>3–9</b> запишите в поле ответа цифру <b>1, 2</b> или <b>3</b> соответствующую выбранному Вами варианту ответа. Вы услышите запись дважды.
+    </div>
+    {% for item in test.listening_3 %}
+    <li>{{item|safe}}</li>
+    <input maxlength="1" type="text" size="1" name="{{forloop.counter}}_3st_answers" />
+    <hr class="hr-faint" />
+    {% endfor %} {% comment %} Reading {% endcomment %} {% comment %} #10 {% endcomment %}
+    <li>Установите соответствие между текстами A–G и заголовками 1–8. Занесите свои ответы в таблицу. Используйте каждую цифру <b>только один раз. В задании один заголовок лишний.</b></li>
+    <div class="info-left">
+      {% for item in test.reading_10_options %}
+      <div>{{item}}</div>
+      {% endfor %}
+    </div>
+
+    <div class="info-left">
+      {% for item in test.reading_10 %}
+      <div>{{item}}</div>
+      <br />
+      {% endfor %}
+    </div>
+
+    <table class="ege-table">
+      <thead>
+        <tr>
+          <th>Текст</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+          <th>G</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Заголовок</td>
+          <td><input maxlength="1" type="text" size="1" name="1_10st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="2_10st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="3_10st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="4_10st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="5_10st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="6_10st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="7_10st_answers" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr class="hr-faint" />
+    {% comment %} #11 {% endcomment %}
+    <li>Прочитайте текст и заполните пропуски <b>A-F</b> частями предложений, обозначенными цифрами 1-7. <b>Одна из частей в списке 1-7 — лишняя.</b></li>
+    <div class="info-left">
+      {% for item in test.reading_11_options %}
+      <div>{{item}}</div>
+      {% endfor %}
+    </div>
+
+    <div class="info-left">{{test.reading_11|safe}}</div>
+    <table class="ege-table">
+      <thead>
+        <tr>
+          <th>Пропуск</th>
+          <th>A</th>
+          <th>B</th>
+          <th>C</th>
+          <th>D</th>
+          <th>E</th>
+          <th>F</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Отрывок</td>
+          <td><input maxlength="1" type="text" size="1" name="1_11st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="2_11st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="3_11st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="4_11st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="5_11st_answers" /></td>
+          <td><input maxlength="1" type="text" size="1" name="6_11st_answers" /></td>
+        </tr>
+      </tbody>
+    </table>
+    <hr class="hr-faint" />
+    {% comment %} #12 {% endcomment %}
+    <div class="margin-bottom">
+      Прочитайте текст и выполните задания <b>12–18</b>. В каждом задании запишите в поле ответа цифру <b>1, 2, 3</b> или <b>4</b>, соответствующую выбранному Вами варианту ответа.
+    </div>
+    {% for item in test.reading_12_options %}
+    <li>{{item|safe}}</li>
+    <div><input type="text" size="1" maxlength="1" name="{{forloop.counter}}_12st_answers" /></div>
+    <a class="show-text">Показать текст</a>
+    <div class="hidden">
+      <div class="info-left">{{test.reading_12|safe}}</div>
+    </div>
+    <hr class="hr-faint" />
+    {% endfor %} {% comment %} Grammar {% endcomment %} {% comment %} #19 {% endcomment %} {% for text, word in grammar19 %}
+    <li>
+      Преобразуйте, если это необходимо, слово <u><b>{{word|upper}}</b></u> так, чтобы оно грамматически соответствовало содержанию текста.
+    </li>
+    {{text|safe}}
+    <div>Ответ: <input type="text" size="20" name="{{forloop.counter}}_19st_answers" /></div>
+    <hr class="hr-faint" />
+    {% endfor %} {% comment %} #25 {% endcomment %} {% for text, word in grammar25 %}
+    <li>
+      Образуйте от слова <u><b>{{word|upper}}</b></u> однокоренное слово так, чтобы оно грамматически и лексически соответствовало содержанию текста.
+    </li>
+    {{text|safe}}
+    <div>Ответ: <input type="text" size="20" name="{{forloop.counter}}_25st_answers" /></div>
+    <hr class="hr-faint" />
+    {% endfor %} {% comment %} #30 {% endcomment %}
+    <div>
+      Прочитайте текст с пропусками, обозначенными номерами <b>30–36</b>. Эти номера соответствуют заданиям <b>30–36</b>, в которых представлены возможные варианты ответов. Запишите в поле ответа
+      цифру <b>1, 2, 3</b> или <b>4</b>, соответствующую выбранному Вами варианту ответа.
+    </div>
+    {% for item in test.grammar_30_options %}
+    <li>{{item|safe}}</li>
+    <div><input type="text" size="1" maxlength="1" name="{{forloop.counter}}_30st_answers" /></div>
+    <a class="show-text">Показать текст</a>
+    <div class="hidden">
+      <div class="info-left">{{test.grammar_30|safe}}</div>
+    </div>
+    <hr class="hr-faint" />
+    {% endfor %} {% comment %} Writing {% endcomment %} {% comment %} #37 Letter {% endcomment %}
+    <li>You have received an email message from your English-speaking pen-friend <b>{{test.letter_name}}</b>:</li>
+    <div class="letter-border">{{test.letter|safe}}</div>
+
+    <div class="margin-top">
+      {{test.letter_task|safe}}
+      <div class="margin-top">Write 100-140 words.</div>
+      <div>Remember the rules of email writing.</div>
+    </div>
+    <textarea placeholder="Пишите ответ на задание №37 здесь" name="letter" id="textarea-1" class="textarea" rows="20" oninput="countWords('text1', 'count1')"></textarea>
+    <div id="word-count-1" class="word-count">0 words</div>
+  </ol>
+  <hr class="ege-hr" />
+  {% comment %} #38 Essay {% endcomment %}
+  <h2 class="center">Выберите только ОДНО из двух предложенных заданий (38.1 или 38.2)</h2>
+  {% comment %} #38.1 {% endcomment %}
+  <div><span class="lvlC1">38.1</span>{{test.essay_1_task|safe}}</div>
+  {{test.essay_1_data|safe}} Write 200–250 words.<br /><br />
+  Use the following plan:<br />
+  – make an opening statement on the subject of the project;<br />
+  – select and report 2–3 facts;<br />
+  – make 1–2 comparisons where relevant and give your comments;<br />
+  {{test.essay_1_conclusion|safe}}
+  <div>
+    <textarea placeholder="Пишите ответ на задание №38.1 здесь" name="essay_1" id="textarea-2" class="textarea" rows="20"></textarea>
+  </div>
+  <div id="word-count-2" class="word-count">0 words</div>
+  {% comment %} #38.2 {% endcomment %}
+  <div class="margin-top"><span class="lvlC1">38.2</span>{{test.essay_2_task|safe}}</div>
+  <img id="ege-image" src="{% static 'website/images/ege/' %}{{test.essay_2_data}}" />
+  Write 200–250 words.<br /><br />
+  Use the following plan:<br />
+  – make an opening statement on the subject of the project;<br />
+  – select and report 2–3 facts;<br />
+  – make 1–2 comparisons where relevant and give your comments;<br />
+  {{test.essay_2_conclusion|safe}}
+  <div>
+    <textarea placeholder="Пишите ответ на задание №38.2 здесь" name="essay_2" id="textarea-3" class="textarea" rows="20"></textarea>
+  </div>
+  <div id="word-count-3" class="word-count">0 words</div>
+
+  <div><button class="button button-smaller" type="submit" onclick="submitForm()">Submit</button></div>
+</form>
+<script>
+  {% comment %} Show Text {% endcomment %}
+      var showTextLinks = document.querySelectorAll('.show-text');
+
+      // Attach click event listener to each show-text link
+      showTextLinks.forEach(function(link) {
+          link.addEventListener('click', function() {
+              // Get the next sibling div element
+              var div = this.nextElementSibling;
+
+              // Toggle the hidden class of the div
+              div.classList.toggle('hidden');
+
+              // Update the text of the link based on the div's visibility
+              if (div.classList.contains('hidden')) {
+              this.textContent = 'Показать текст';
+              } else {
+              this.textContent = 'Спрятать текст';
+              }
+          });
+      });
+  {% comment %} Timer {% endcomment %}
+      const countdown = document.getElementById('countdown-timer');
+      const pauseButton = document.getElementById('pause-button');
+      const myForm = document.getElementById('my-form');
+
+      let timeRemaining = 190*60; // 3 hours in seconds
+      let timer;
+
+      function formatTime(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      seconds %= 3600;
+      const minutes = Math.floor(seconds / 60);
+      seconds %= 60;
+      return `${hours}ч ${minutes}м ${seconds}с`;
+      }
+
+      function updateTimer() {
+      countdown.textContent = `Осталось: ${formatTime(timeRemaining)}`;
+
+      if (timeRemaining <= 1800 && timeRemaining > 600) {
+          countdown.classList.add('yellow');
+      } else if (timeRemaining <= 600) {
+          countdown.classList.remove('yellow');
+          countdown.classList.add('pink');
+      }
+
+      if (timeRemaining === 0) {
+          clearInterval(timer);
+          window.onbeforeunload = null;
+          myForm.submit();
+      } else {
+          timeRemaining--;
+      }
+      }
+
+      updateTimer();
+      timer = setInterval(updateTimer, 1000);
+
+      let isPaused = false;
+
+      function pauseTimer() {
+      clearInterval(timer);
+      isPaused = true;
+      pauseButton.textContent = 'Продолжить';
+      }
+
+      function resumeTimer() {
+      timer = setInterval(updateTimer, 1000);
+      isPaused = false;
+      pauseButton.textContent = 'Пауза';
+      }
+
+      pauseButton.addEventListener('click', function(event) {
+      event.preventDefault(); // prevent default behavior of <a> tag
+      if (!isPaused) {
+          pauseTimer();
+      } else {
+          resumeTimer();
+      }
+      });
+  {% comment %} wordcount {% endcomment %}
+      function countWords(textarea, wordCount) {
+          const text = textarea.value.trim();
+          const words = text === '' ? [] : text.split(/\s+/);
+          const numWords = words.length;
+
+          if (numWords === 0) {
+          wordCount.textContent = "0 words";
+          } else if (numWords === 1) {
+          wordCount.textContent = `${numWords} word`;
+          } else {
+          wordCount.textContent = `${numWords} words`;
+          }
+      }
+
+      const textareas = document.querySelectorAll('.textarea');
+      const wordCounts = document.querySelectorAll('.word-count');
+
+      for (let i = 0; i < textareas.length; i++) {
+          textareas[i].addEventListener('input', function() {
+              countWords(textareas[i], wordCounts[i]);
+          });
+      }
+</script>
+{% endblock %}

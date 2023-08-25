@@ -1,0 +1,48 @@
+{% extends "website/layout.html" %} {% block title %}Тесты{% endblock %} {% load static %} {% block body %}
+<h2>
+  Tests
+  <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+    <defs>
+      <linearGradient id="grad" gradientTransform="rotate(90)">
+        <stop offset="0%" stop-color="#fc5e9b" />
+        <stop offset="73%" stop-color="#735adb" />
+        <stop offset="88%" stop-color="#3f90e5" />
+        <stop offset="165%" stop-color="#ecedef" />
+        <stop offset="165%" stop-color="#f0eff0" />
+      </linearGradient>
+    </defs>
+    <path
+      fill="url(#grad)"
+      d="M3 6.25A3.25 3.25 0 0 1 6.25 3h11.5A3.25 3.25 0 0 1 21 6.25v11.5A3.25 3.25 0 0 1 17.75 21H6.25A3.25 3.25 0 0 1 3 17.75V6.25ZM7.25 14a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5ZM6.5 9.25c0 .414.336.75.75.75h3.5a.75.75 0 0 0 0-1.5h-3.5a.75.75 0 0 0-.75.75Zm11.28-.47a.75.75 0 0 0-1.06-1.06l-1.47 1.47l-.47-.47a.75.75 0 1 0-1.06 1.06l1 1a.75.75 0 0 0 1.06 0l2-2Zm0 4.44a.75.75 0 0 0-1.06 0l-1.47 1.47l-.47-.47a.75.75 0 1 0-1.06 1.06l1 1a.75.75 0 0 0 1.06 0l2-2a.75.75 0 0 0 0-1.06Z" />
+  </svg>
+</h2>
+<hr class="hr-faint" />
+
+{% for theory_entry, tests in tests_by_topic.items %}
+<div class="folder folder-tablet margin-bottom">{{theory_entry.topic}}</div>
+<div class="collapsible">
+  {% for test in tests %}
+  <a href="{% url 'single_test' testname=test.url %}">
+    <div class="one-line">
+      <span class="{% if test.lvl.0 == 'A' %}lvlA{% elif test.lvl.0 == 'B' %}lvlB1{% else %}lvlC1{% endif %}">{{test.lvl}}</span>
+      {{test.testname}} {% if test.url in solved_set %}✅{% endif %}
+    </div>
+  </a>
+  {% if forloop.last %}
+  <hr class="hr-faint" />
+  {% endif %} {% endfor %}
+</div>
+{% endfor %}
+
+<style>
+  .container {
+    padding-top: 4rem;
+  }
+
+  @media all and (max-width: 480px) {
+    .container {
+      padding-top: 0.5rem;
+    }
+  }
+</style>
+{% endblock %}

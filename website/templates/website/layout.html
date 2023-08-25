@@ -1,0 +1,1362 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <!-- Yandex.Metrika counter -->
+        <script type="text/javascript" >
+            (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+            m[i].l=1*new Date();
+            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+            (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+         
+            ym(93244844, "init", {
+                 clickmap:true,
+                 trackLinks:true,
+                 accurateTrackBounce:true,
+                 webvisor:true
+            });
+         </script>
+         <noscript><div><img src="https://mc.yandex.ru/watch/93244844" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+         <!-- /Yandex.Metrika counter -->
+        <meta charset="UTF-8">
+        <meta name="yandex-verification" content="75c453fcedc5374a" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        {% comment %} image {% endcomment %}
+        <meta property="og:image" content="https://englishful.ru/static/website/images/new_logo.png">
+        <meta property="og:image:secure_url" content="https://englishful.ru/static/website/images/new_logo.png">
+        <meta property="vk:image" content="https://englishful.ru/static/website/images/new_logo.png">
+        <meta property="instagram:image" content="https://englishful.ru/static/website/images/square_og.png">
+        <meta property="telegram:image" content="https://englishful.ru/static/website/images/square_og.png">
+        <meta name="twitter:card" content="summary_large_image">
+        <meta name="twitter:title" content="Онлайн-школа английского языка englishful">
+        <meta name="twitter:description" content="Englishful — английский онлайн, в группах и индивидуально с опытными преподавателями на собственной платформе">
+        <meta property="twitter:image" content="https://englishful.ru/static/website/images/new_logo.png">
+        {% comment %} image {% endcomment %}
+        <meta property="og:image:type" content="image/png">
+        <meta name="description" content="Englishful — английский онлайн, в группах и индивидуально с опытными преподавателями на собственной платформе">
+        <meta property="og:title" content="Онлайн-школа английского языка englishful">
+        <meta property="og:description" content="Englishful — английский онлайн, в группах и индивидуально с опытными преподавателями на собственной платформе">
+        <meta property="og:keywords" content="английский язык, английский язык онлайн, изучение английского онлайн, групповые занятия по английскому, индивидуальные занятия по английскому, подготовка к экзаменам, подготовка к ЕГЭ, подготовка к ЕГЭ онлайн, подготовка к ОГЭ, подготовка к ОГЭ онлайн, подготовка к IELTS, подготовка к IELTS онлайн, подготовка к TOEFL, подготовка к TOEFL онлайн, подготовка к собеседованиям, подготовка к собеседованиям на английском, подготовка к собеседованию для получения визы,  обучение английскому языку, репетитор по английскому, онлайн-репетитор по английскому, онлайн-школа английского языка, английский для начинающих, корпоративный английский, английский для компаний, englishful">
+        <meta property="og:site_name" content="Englishful: онлайн-школа английского языка">
+        <meta property="og:type" content="website">
+        <meta property="og:url" content="https://englishful.ru/">
+        <meta property="og:locale" content="ru_RU">
+        <meta name="format-detection" content="telephone=no, email=no, address=no">
+        {% comment %} Icon {% endcomment %}
+        <link rel="apple-touch-icon" sizes="180x180" href="{% static 'website/images/apple-touch-icon.png' %}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{% static 'website/images/favicon-32x32.png' %}">
+        <link rel="icon" type="image/png" sizes="16x16" href="{% static 'website/images/favicon-16x16.png' %}">
+        <link rel="manifest" href="{% static 'website/images/site.webmanifest' %}">
+        {% comment %} Icon {% endcomment %}
+        <link rel="stylesheet" href="{% static 'website/css/main.css' %}">
+        <title>{% block title %}Englishful: онлайн-школа английского языка{% endblock %}</title>
+    </head>
+
+<body>
+        <div class="nav">
+
+            <div id="logo"><img class="logo-nav" src="{% static 'website/images/about/logo-menu.png' %}" alt="logo-footer"></div>
+            
+            <a id="about" href="{% url 'index' %}">
+                <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 1.998c5.524 0 10.002 4.478 10.002 10.002c0 5.523-4.478 10-10.002 10c-5.524.001-10-4.477-10-10C1.999 6.476 6.476 1.998 12 1.998Zm-.004 8.25a1 1 0 0 0-.992.885l-.007.116l.004 5.502l.006.116a1 1 0 0 0 1.987 0L13 16.75l-.004-5.502l-.007-.117a1 1 0 0 0-.994-.882Zm.005-3.749a1.251 1.251 0 1 0 0 2.503A1.251 1.251 0 0 0 12 6.5Z"/>
+                </svg>
+            </a>
+
+            {% if not user.is_authenticated %}
+                <a href="{% url 'free_tests' %}">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="-2 -2 24 24">
+                        <path fill="currentColor" d="M6 0h8a6 6 0 0 1 6 6v8a6 6 0 0 1-6 6H6a6 6 0 0 1-6-6V6a6 6 0 0 1 6-6zm0 2a4 4 0 0 0-4 4v8a4 4 0 0 0 4 4h8a4 4 0 0 0 4-4V6a4 4 0 0 0-4-4H6zm6 7h3a1 1 0 0 1 0 2h-3a1 1 0 0 1 0-2zm-2 4h5a1 1 0 0 1 0 2h-5a1 1 0 0 1 0-2zm0-8h5a1 1 0 0 1 0 2h-5a1 1 0 1 1 0-2zm-4.172 5.243L7.95 8.12a1 1 0 1 1 1.414 1.415l-2.828 2.828a1 1 0 0 1-1.415 0L3.707 10.95a1 1 0 0 1 1.414-1.414l.707.707z"/>
+                    </svg>
+                </a>
+            {% endif %}
+
+            {% if user.is_authenticated %}
+
+                <a href="{% url 'results' %}">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M7.5 6.5C7.5 8.981 9.519 11 12 11s4.5-2.019 4.5-4.5S14.481 2 12 2S7.5 4.019 7.5 6.5zM20 21h1v-1c0-3.859-3.141-7-7-7h-4c-3.86 0-7 3.141-7 7v1h17z"/>
+                    </svg>
+                </a>
+
+                <a href="{% url 'tests' %}">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M21.707 3.293a1 1 0 0 0-1.414 0L19 4.586l-.293-.293a1 1 0 1 0-1.414 1.414l1 1a1 1 0 0 0 1.414 0l2-2a1 1 0 0 0 0-1.414ZM14.004 17H3l-.117.007A1 1 0 0 0 3 19h11.004l.117-.007A1 1 0 0 0 14.003 17Zm0-6H3l-.117.007A1 1 0 0 0 3 13h11.004l.117-.007A1 1 0 0 0 14.003 11Zm0-6H3l-.117.007A1 1 0 0 0 3 7h11.004l.117-.007A1 1 0 0 0 14.003 5Zm7.703 11.293a1 1 0 0 0-1.414 0L19 17.586l-.293-.293a1 1 0 0 0-1.414 1.414l1 1a1 1 0 0 0 1.414 0l2-2a1 1 0 0 0 0-1.414Zm-1.414-6.5a1 1 0 1 1 1.414 1.414l-2 2a1 1 0 0 1-1.414 0l-1-1a1 1 0 0 1 1.414-1.414l.293.293l1.293-1.293Z"/>
+                    </svg>
+                </a>
+
+                <a href="{% url 'theory' %}">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor"><path fill-rule="evenodd" d="M6.271 2.112c-.81.106-1.238.301-1.544.6c-.305.3-.504.72-.613 1.513C4.002 5.042 4 6.124 4 7.675v8.57a4.172 4.172 0 0 1 1.299-.593c.528-.139 1.144-.139 2.047-.138H20V7.676c0-1.552-.002-2.634-.114-3.451c-.109-.793-.308-1.213-.613-1.513c-.306-.299-.734-.494-1.544-.6c-.834-.11-1.938-.112-3.522-.112H9.793c-1.584 0-2.688.002-3.522.112Zm.488 4.483c0-.448.37-.811.827-.811h8.828a.82.82 0 0 1 .827.81a.82.82 0 0 1-.827.811H7.586a.82.82 0 0 1-.827-.81Zm.827 2.973a.82.82 0 0 0-.827.81c0 .448.37.811.827.811h5.517a.82.82 0 0 0 .828-.81a.82.82 0 0 0-.828-.811H7.586Z" clip-rule="evenodd"/><path d="M7.473 17.135H20c-.003 1.13-.021 1.974-.113 2.64c-.109.793-.308 1.213-.613 1.513c-.306.299-.734.494-1.544.6c-.834.11-1.938.112-3.522.112H9.793c-1.584 0-2.688-.002-3.522-.111c-.81-.107-1.238-.302-1.544-.601c-.305-.3-.504-.72-.613-1.513c-.041-.3-.068-.637-.084-1.02a2.464 2.464 0 0 1 1.697-1.537c.29-.076.667-.083 1.746-.083Z"/></g></svg>
+                </a>
+
+                <a href="{% url 'dictionary' %}">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M6 22q-.825 0-1.413-.588T4 20V4q0-.825.588-1.413T6 2h12q.825 0 1.413.588T20 4v16q0 .825-.588 1.413T18 22H6Zm5-11l2.5-1.5L16 11V4h-5v7Z"/>
+                    </svg>
+                </a>
+                
+                <a class="out" href="{% url 'logout' %}" onclick="return confirm('Вы уверены, что хотите выйти?')">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M15.325 16.275q-.275-.325-.275-.737t.275-.688l1.85-1.85H10q-.425 0-.713-.288T9 12q0-.425.288-.713T10 11h7.175l-1.85-1.85q-.3-.3-.3-.713t.3-.712q.275-.3.688-.3t.687.275l3.6 3.6q.15.15.213.325t.062.375q0 .2-.062.375t-.213.325l-3.6 3.6q-.325.325-.713.288t-.662-.313ZM5 21q-.825 0-1.413-.588T3 19V5q0-.825.588-1.413T5 3h6q.425 0 .713.288T12 4q0 .425-.288.713T11 5H5v14h6q.425 0 .713.288T12 20q0 .425-.288.713T11 21H5Z"/>
+                    </svg>
+                </a>
+            
+            {% else %}
+
+                <a href="{% url 'login' %}">
+                    <svg class="nav-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M9.325 16.275q-.275-.325-.275-.737t.275-.688l1.85-1.85H4q-.425 0-.713-.288T3 12q0-.425.288-.713T4 11h7.175l-1.85-1.85q-.3-.3-.3-.713t.3-.712q.275-.3.688-.3t.687.275l3.6 3.6q.15.15.213.325t.062.375q0 .2-.062.375t-.213.325l-3.6 3.6q-.3.3-.7.275t-.675-.3ZM13 21q-.425 0-.712-.287T12 20q0-.425.288-.713T13 19h6V5h-6q-.425 0-.713-.288T12 4q0-.425.288-.713T13 3h6q.825 0 1.413.588T21 5v14q0 .825-.588 1.413T19 21h-6Z"/>
+                    </svg>
+                </a>
+            
+            {% endif %}
+        </div>
+<div class="container">
+    {% block body %}
+    
+                {% comment %} Intro {% endcomment %}
+                    <div style="margin-bottom: 2rem;" class="center">
+                        <div class="center-basic center-flex">
+                            <h1><span class="gradient-fill">Englishful</span></h1><img class="logo-main" src="{% static 'website/images/about/logo-menu.png' %}">
+                        </div>
+                        <div style="text-align: center;" class="center-basic larger">
+                            Доверьте ваш английский в надёжные руки
+                        </div>
+                    </div>
+
+                    <div style="margin-bottom: 2rem;" class="wrapper-points">
+                        <div class="about-points">
+                            <div><b class="gradient-fill-c1">С1 Advanced</b></div>
+                            <div>Минимальный уровень преподавателей</div>
+                        </div>
+                        <div class="about-points">
+                            <div>Собственная <b class="gradient-fill">онлайн платформа</b></div>
+                        </div>
+                        <div class="about-points">
+                            <div><b class="gradient-fill-green">Бесплатное</b> первое занятие и тест уровня языка</div>
+                        </div>
+                        <div class="about-points">
+                            <div><b class="gradient-fill">Индивидуальный</b>, а не конвейерный подход</div>
+                        </div>
+                    </div>
+
+                    <div class="center margin-top">
+                        <div style="max-width: 700px; text-align: center;" class="smaller center-basic"> <b>“</b>Английский язык — ключ к миру возможностей. Наши преподаватели помогут вам открыть дверь в этот мир.<b>”</b></div>
+                        <div class="center center-flex founder"><img class="center-basic" style="height: 50px; width: 50px; border-radius: 50%; margin-right: 10px; border: 1px solid white;" src="{% static 'website/images/teachers/profile.jpg' %}" alt="Profile Picture"> <div><a target=”_blank” href="https://t.me/wassup21"><b>Илья</b></a> – создатель englishful</div></div>
+                        <div class="center-basic"><button data-target-popup="#popup-container" class="button button-pricing btn-main-free margin-top margin-bottom">Попробовать бесплатно</button></div>
+                        
+                        <hr class="hr-faint-divider">
+
+                        {% comment %} Pop Up {% endcomment %}
+                            <div id="popup-container" class="popup-container">
+                                <div class="popup-header">
+                                    <div class="centered-text">Напишите нам в любом мессенджере для записи на бесплатное занятие 💬</div>
+                                    <div data-close-button id="close-btn" class="close-btn">&times;</div>
+                                </div>
+
+                                <hr class="hr-faint-divider">
+                                
+                                <div class="wrapper">
+                                    {% comment %} TG {% endcomment %}
+                                    <a id="tg" class="button-landing" target=”_blank” href="https://t.me/wassup21">
+                                        <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19c-.14.75-.42 1-.68 1.03c-.58.05-1.02-.38-1.58-.75c-.88-.58-1.38-.94-2.23-1.5c-.99-.65-.35-1.01.22-1.59c.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02c-.09.02-1.49.95-4.22 2.79c-.4.27-.76.41-1.08.4c-.36-.01-1.04-.2-1.55-.37c-.63-.2-1.12-.31-1.08-.66c.02-.18.27-.36.74-.55c2.92-1.27 4.86-2.11 5.83-2.51c2.78-1.16 3.35-1.36 3.73-1.36c.08 0 .27.02.39.12c.1.08.13.19.14.27c-.01.06.01.24 0 .38z"/>
+                                        </svg>Telegram
+                                    </a>
+                                    {% comment %} WhatsApp {% endcomment %}
+                                    <a id="whatsapp" class="button-landing" target=”_blank” href="https://wa.me/+79159592263">
+                                        <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M19.05 4.91A9.816 9.816 0 0 0 12.04 2c-5.46 0-9.91 4.45-9.91 9.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91c0-2.65-1.03-5.14-2.9-7.01zm-7.01 15.24c-1.48 0-2.93-.4-4.2-1.15l-.3-.18l-3.12.82l.83-3.04l-.2-.31a8.264 8.264 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24c2.2 0 4.27.86 5.82 2.42a8.183 8.183 0 0 1 2.41 5.83c.02 4.54-3.68 8.23-8.22 8.23zm4.52-6.16c-.25-.12-1.47-.72-1.69-.81c-.23-.08-.39-.12-.56.12c-.17.25-.64.81-.78.97c-.14.17-.29.19-.54.06c-.25-.12-1.05-.39-1.99-1.23c-.74-.66-1.23-1.47-1.38-1.72c-.14-.25-.02-.38.11-.51c.11-.11.25-.29.37-.43s.17-.25.25-.41c.08-.17.04-.31-.02-.43s-.56-1.34-.76-1.84c-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31c-.22.25-.86.85-.86 2.07c0 1.22.89 2.4 1.01 2.56c.12.17 1.75 2.67 4.23 3.74c.59.26 1.05.41 1.41.52c.59.19 1.13.16 1.56.1c.48-.07 1.47-.6 1.67-1.18c.21-.58.21-1.07.14-1.18s-.22-.16-.47-.28z"/>
+                                        </svg>WhatsApp
+                                    </a>
+                                    {% comment %} Viber {% endcomment %}
+                                    <a id="viber" class="button-landing" target=”_blank” href="viber://chat?number=+79159592263">
+                                        <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M7.965 6.202a.822.822 0 0 0-.537.106h-.014c-.375.22-.713.497-1.001.823c-.24.277-.37.557-.404.827c-.02.16-.006.322.041.475l.018.01c.27.793.622 1.556 1.052 2.274a13.374 13.374 0 0 0 2.03 2.775l.024.034l.038.028l.023.027l.028.024a13.564 13.564 0 0 0 2.782 2.04c1.155.629 1.856.926 2.277 1.05v.006c.123.038.235.055.348.055a1.61 1.61 0 0 0 .964-.414c.325-.288.6-.627.814-1.004v-.007c.201-.38.133-.738-.157-.981A12.126 12.126 0 0 0 14.41 13c-.448-.243-.903-.096-1.087.15l-.393.496c-.202.246-.568.212-.568.212l-.01.006c-2.731-.697-3.46-3.462-3.46-3.462s-.034-.376.219-.568l.492-.396c.236-.192.4-.646.147-1.094a11.807 11.807 0 0 0-1.347-1.88a.748.748 0 0 0-.44-.263ZM12.58 5a.5.5 0 0 0 0 1c1.264 0 2.314.413 3.145 1.205c.427.433.76.946.978 1.508c.219.563.319 1.164.293 1.766a.5.5 0 0 0 1 .042a5.359 5.359 0 0 0-.361-2.17a5.442 5.442 0 0 0-1.204-1.854l-.01-.01C15.39 5.502 14.085 5 12.579 5Z"/><path fill="currentColor" d="M12.545 6.644a.5.5 0 0 0 0 1h.017c.912.065 1.576.369 2.041.868c.477.514.724 1.153.705 1.943a.5.5 0 0 0 1 .023c.024-1.037-.31-1.932-.972-2.646V7.83c-.677-.726-1.606-1.11-2.724-1.185l-.017-.002h-.05Z"/><path fill="currentColor" d="M12.526 8.319a.5.5 0 1 0-.052.998c.418.022.685.148.853.317c.169.17.295.443.318.87a.5.5 0 1 0 .998-.053c-.032-.6-.22-1.13-.605-1.52c-.387-.39-.914-.58-1.512-.612Z"/><path fill="currentColor" fill-rule="evenodd" d="M7.067 2.384a22.15 22.15 0 0 1 9.664 0l.339.075a5.155 5.155 0 0 1 3.872 3.763a19.718 19.718 0 0 1 0 9.7a5.155 5.155 0 0 1-3.872 3.763l-.34.075a22.15 22.15 0 0 1-6.077.499L8 22.633a.75.75 0 0 1-1.24-.435l-.439-2.622a5.155 5.155 0 0 1-3.465-3.654a19.717 19.717 0 0 1 0-9.7a5.155 5.155 0 0 1 3.872-3.763l.339-.075Zm9.337 1.463a20.65 20.65 0 0 0-9.01 0l-.34.076A3.655 3.655 0 0 0 4.31 6.591a18.217 18.217 0 0 0 0 8.962a3.655 3.655 0 0 0 2.745 2.668l.09.02a.75.75 0 0 1 .576.608l.294 1.758l1.872-1.675a.75.75 0 0 1 .553-.19a20.653 20.653 0 0 0 5.964-.445l.339-.076a3.655 3.655 0 0 0 2.745-2.668c.746-2.94.746-6.021 0-8.962a3.655 3.655 0 0 0-2.745-2.668l-.34-.076Z" clip-rule="evenodd"/>
+                                        </svg>Viber
+                                    </a>
+                                    {% comment %} VK {% endcomment %}
+                                    <a id="vk" class="button-landing" target=”_blank” href="https://vk.com/ilyushi4ka">
+                                        <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M15.073 2H8.937C3.333 2 2 3.333 2 8.927v6.136C2 20.666 3.323 22 8.927 22h6.136C20.666 22 22 20.677 22 15.073V8.937C22 3.333 20.677 2 15.073 2Zm3.073 14.27h-1.459c-.552 0-.718-.447-1.708-1.437c-.864-.833-1.229-.937-1.448-.937c-.302 0-.385.083-.385.5v1.312c0 .355-.115.563-1.042.563a5.692 5.692 0 0 1-4.448-2.667a11.626 11.626 0 0 1-2.302-4.833c0-.219.083-.417.5-.417h1.458c.375 0 .51.167.657.552c.708 2.084 1.916 3.896 2.406 3.896c.188 0 .27-.083.27-.552v-2.146c-.062-.979-.582-1.062-.582-1.416a.36.36 0 0 1 .374-.334h2.292c.313 0 .417.156.417.531v2.896c0 .313.135.417.229.417c.188 0 .333-.104.677-.448a11.999 11.999 0 0 0 1.792-2.98a.628.628 0 0 1 .635-.416h1.459c.437 0 .53.219.437.531a18.205 18.205 0 0 1-1.958 3.365c-.157.24-.22.365 0 .646c.145.219.656.646 1 1.052a6.486 6.486 0 0 1 1.229 1.708c.125.406-.084.615-.5.615Z"/>
+                                        </svg>VK
+                                    </a>
+                                </div>
+                        
+                                <hr class="hr-faint-divider">
+                        
+                                <div id="social-prompt" style="margin-bottom: 5px;" class="center-basic normal-line centered-text">Подписывайтесь на наши социальные сети ✌</div>
+                                <div class="date_time_flex normal-line centered-text center-basic margin-bottom">Там вы cможете найти промокоды на скидки, а также интересный контент про английский</div>
+                                    
+                                <div class="wrapper">
+                                    <a id="tg" class="button-landing" target=”_blank” href="https://t.me/englishful_school">
+                                        <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19c-.14.75-.42 1-.68 1.03c-.58.05-1.02-.38-1.58-.75c-.88-.58-1.38-.94-2.23-1.5c-.99-.65-.35-1.01.22-1.59c.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02c-.09.02-1.49.95-4.22 2.79c-.4.27-.76.41-1.08.4c-.36-.01-1.04-.2-1.55-.37c-.63-.2-1.12-.31-1.08-.66c.02-.18.27-.36.74-.55c2.92-1.27 4.86-2.11 5.83-2.51c2.78-1.16 3.35-1.36 3.73-1.36c.08 0 .27.02.39.12c.1.08.13.19.14.27c-.01.06.01.24 0 .38z"/>
+                                        </svg>
+                                    </a>
+
+                                    <a id="yt" class="button-landing" target=”_blank” href="https://www.youtube.com/channel/UCZV3ZMO4ORY0Zo-mdj7mTAg">
+                                        <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M12.244 4c.534.003 1.87.016 3.29.073l.504.022c1.429.067 2.857.183 3.566.38c.945.266 1.687 1.04 1.938 2.022c.4 1.56.45 4.602.456 5.339l.001.152v.174c-.007.737-.057 3.78-.457 5.339c-.254.985-.997 1.76-1.938 2.022c-.709.197-2.137.313-3.566.38l-.504.023c-1.42.056-2.756.07-3.29.072l-.235.001h-.255c-1.13-.007-5.856-.058-7.36-.476c-.944-.266-1.687-1.04-1.938-2.022c-.4-1.56-.45-4.602-.456-5.339v-.326c.006-.737.056-3.78.456-5.339c.254-.985.997-1.76 1.939-2.021c1.503-.419 6.23-.47 7.36-.476h.489ZM9.999 8.5v7l6-3.5l-6-3.5Z"/>
+                                        </svg>
+                                    </a>
+
+                                    <a id="vk" class="button-landing" target=”_blank” href="https://vk.com/englishful">
+                                        <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M15.073 2H8.937C3.333 2 2 3.333 2 8.927v6.136C2 20.666 3.323 22 8.927 22h6.136C20.666 22 22 20.677 22 15.073V8.937C22 3.333 20.677 2 15.073 2Zm3.073 14.27h-1.459c-.552 0-.718-.447-1.708-1.437c-.864-.833-1.229-.937-1.448-.937c-.302 0-.385.083-.385.5v1.312c0 .355-.115.563-1.042.563a5.692 5.692 0 0 1-4.448-2.667a11.626 11.626 0 0 1-2.302-4.833c0-.219.083-.417.5-.417h1.458c.375 0 .51.167.657.552c.708 2.084 1.916 3.896 2.406 3.896c.188 0 .27-.083.27-.552v-2.146c-.062-.979-.582-1.062-.582-1.416a.36.36 0 0 1 .374-.334h2.292c.313 0 .417.156.417.531v2.896c0 .313.135.417.229.417c.188 0 .333-.104.677-.448a11.999 11.999 0 0 0 1.792-2.98a.628.628 0 0 1 .635-.416h1.459c.437 0 .53.219.437.531a18.205 18.205 0 0 1-1.958 3.365c-.157.24-.22.365 0 .646c.145.219.656.646 1 1.052a6.486 6.486 0 0 1 1.229 1.708c.125.406-.084.615-.5.615Z"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        <div id="overlay"></div>
+                            
+                        <div class="wrapper">
+                            <a href="#why-section" class="button-about" data-type="landingButton" data-corresponding="why-section">Почему мы? 🧐</a>
+                            <a id="teachers-section" href="#teachers-section" class="button-about" data-type="landingButton" data-corresponding="teachers-section">Преподаватели 🤓</a>
+                            <a id="reviews-section" href="#reviews-section" class="button-about" data-type="landingButton" data-corresponding="reviews-section">Отзывы 🌟</a>
+                            <a href="#prices-section" class="button-about" data-type="landingButton" data-corresponding="prices-section">Цены и услуги 💸</a>
+                            <a id="partners-section" href="#partners-section" class="button-about" data-type="landingButton" data-corresponding="partners-section">Партнеры 🔥</a>
+                        </div>
+                    </div>
+            
+                
+                {% comment %} Why section {% endcomment %}
+                    <div data-section="why-section" data-type="landingSection" style="display: none;">
+                        <h3 style="text-align:center;" class="faint-border">Рассказываем, почему стоит выбрать нас</h3>
+                        <section class="pricing-section">
+                            
+                            {% comment %} Pains {% endcomment %}
+                                <div class="pricing-card">
+                                    <h3 class="header-margin underline center-basic">Мы вас понимаем 😌</h3>
+                                        
+                                        <div class="pains-header">😒 Не знаете с чего начать? Хочется системного подхода?</div>
+                                        <div class="included">✅ Составляем индивидуальную программу учитывая ваши пожелания – все просто и понятно.</div>
+                                        <h3>Пример индивидуальной программы 📑</h3>
+                                            <div class="center-basic">
+                                                <img class="image-example pc_example" src="{% static 'website/images/about/personal_plan.jpg' %}" alt="Индивидуальный план">
+                                                <img class="image-example mobile_example" src="{% static 'website/images/about/personal_plan_mobile.jpg' %}" alt="Индивидуальный план">
+                                            </div>
+                                                    
+                                        <hr class="hr-faint">
+                                        <div class="pains-header">😒 Тяжело учить новые слова, так как они записаны в сотне разных мест и постоянно теряются?</div>
+                                        <div class="included">✅ У каждого ученика есть удобный словарь, в котором есть:
+                                        <ol>
+                                            <li>Все слова разделены по темам</li>
+                                            <li>Есть возможность фильтрации слов по темам, прогрессу изучения, дате добавления</li>
+                                            <li>Для каждого слова есть пример его употребления в контексте</li>
+                                            <li>Озвучка каждого слова и примера его употребления в контексте, есть возможность регулировать скорость диктора</li>
+                                            <li>Тренировка слов с помощью словарных карточек. У каждого слова и каждой темы есть индикатор прогресса</li>
+                                        </ol>
+                                        </div>
+
+                                            <h3>Тренажер слов 🦾</h3>
+                                                <video class="video-example" autoplay loop muted loading="lazy">
+                                                    <source src="{% static 'website/videos/about-page/dict_training.mp4' %}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+
+                                            <div class="pc_example">
+                                            <h3>Интерфейс словаря с компьютера 💻</h3>
+                                                <video class="video-example" autoplay loop muted loading="lazy">
+                                                    <source  src="{% static 'website/videos/about-page/dict_interface.mp4' %}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
+                                            
+                                            <div class="mobile_example">
+                                            <h3>Интерфейс словаря 📱</h3>
+                                                <video class="video-example" id="mobile_inteface" autoplay loop muted loading="lazy">
+                                                    <source src="{% static 'website/videos/about-page/dict_interface_mobile.mp4' %}" type="video/mp4">
+                                                    Your browser does not support the video tag.
+                                                </video>
+                                            </div>
+
+                                        <hr class="hr-faint">
+                                        <div class="pains-header">😒 Тяжело подобрать время для занятий?</div>
+                                        <div class="included">✅ Гибкое расписание, не обязательно согласовывать время за неделю.</div>
+
+                                        <hr class="hr-faint">
+                                        <div class="pains-header">😒 Боитесь предвзятого отношения?</div>
+                                        <div class="included">✅ У нас этому нет места. Никто не будет закатывать глаза, если вы что-то скажете неправильно или не знаете какого-то слова. Ошибаться - это не только нормально, но и полезно. Ведь ошибки - это опыт, а чем больше опыта, тем лучше результат!</div>
+
+                                        <hr class="hr-faint">
+                                        <div class="pains-header">😒 Думаете, что вы недостаточно хороши для английского или что уже поздно начинать?</div>
+                                        <div class="included">✅ Во-первых – начинать никогда не поздно. Во-вторых – объяснить можно всё и всем, главное найти подход – а подход мы обязательно найдём!</div>
+
+                                        <hr class="hr-faint">
+                                        <div class="pains-header">😒 Не с кем практиковать английский вне занятий?</div>
+                                        <div class="included">✅ У нас есть решение – <b>разговорные клубы</b></div>
+                                        <div class="margin-top flex-center">– Что за разговорные клубы?<span class="emoji-margin">🧐</span></div>
+                                        <div class="margin-top included">👉 Идея проста: если есть ученики с похожим уровнем и никто из них не против поделиться контактами и попрактиковать английский – мы даем им контакты друг-друга, чтобы они могли созваниваться и практиковать английский вместе. Естественно, это <b class="gradient-fill-green">бесплатно</b> </div>
+                                </div>
+
+                            <hr class="hr-faint-divider">
+
+
+                            {% comment %} Platform {% endcomment %}
+                                <div class="pricing-card">
+                                    <h3 class="header-margin underline center-basic">Собственная онлайн платформа для удобства изучения языка</h3>
+                                    <div class="included">
+                                        <div>✅ Личный кабинет ученика с индивидуальным планом занятий и прогрессом изучения языка</div><hr class="hr-faint">
+                                        <div>✅ Тесты с моментальной проверкой и сохранением результата</div><hr class="hr-faint">
+                                        <div>✅ Материалы для изучения языка</div><hr class="hr-faint">
+                                        <div>✅ Удобный словарь</div><hr class="hr-faint">
+                                        <div>✅ Сдача пробных экзаменов: ЕГЭ, ОГЭ, IELTS и так далее</div><hr class="hr-faint">
+
+                                        <div>👉 Всё, что нужно для комфортного и эффективного изучения английского собрано в одном месте для вашего удобства!</div>
+                                        {% comment %} <div class="pains-header center-basic">– Как это все будет выглядеть? 🧐</div> {% endcomment %}
+                                        
+                                        {% comment %} <div class="margin-top">👉 Показываю и рассказываю в <a>этом видео</a></div> {% endcomment %}
+                                    </div>
+                                    <div class="margin-top"> <span class="date_time">У вас будет возможность опробовать все лично после записи на пробное занятие, так как у вас появится аккаунт</span> </div>
+                                </div>
+                                <hr class="hr-faint-divider">
+                        
+
+                            {% comment %} Free lesson {% endcomment %}
+                                <div class="pricing-card">
+                                    <h3 class="header-margin underline center-basic">Первое занятие и комплексный тест уровня языка – <b class="gradient-fill-green">бесплатно</b><span class="emoji-margin">🆓</span></h3>
+                                    <div class="included">
+                                        <div>✅ Протестируем основные аспекты владения языком: аудирование, чтение, письмо и говорение – <b class="gradient-fill-green">бесплатно</b></div><hr class="hr-faint">
+                                        <div>✅ Обратная связь по результатам тестирования и рекоммендации по улучшению вашего английского – <b class="gradient-fill-green">бесплатно</b></div><hr class="hr-faint">
+                                        <div>✅ Пробное занятие – <b class="gradient-fill-green">бесплатно</b></div>
+                                        <div class="flex-center margin-top">– Слишком хорошо звучит, в чем подвох?<span class="emoji-margin">🧐</span></div>
+                                        <div class="margin-top">👉 Никакого подвоха нет. Мы уверены в качестве предоставляемых услуг. Поэтому думаем, что после пробного занятия вам захочется продолжить учить язык в <b class="gradient-fill">englishful</b><span class="emoji-margin">😎</span></div>
+                                    </div>
+                                </div>
+                                <hr class="hr-faint-divider">
+
+                            {% comment %} Competency {% endcomment %}
+                                <div class="pricing-card">
+                                    <h3 class="header-margin underline center-basic">Компетентность преподавателей</h3>
+                                    <div class="included">
+                                        <div>✅ Преподаватели – выпускники <b>лучших лингвистических ВУЗов России</b></div> <hr class="hr-faint">
+                                        <div>✅ Наши преподаватели объясняют все простым и доступным языком, а не цитируют учебник. Объясняем даже сложные вещи простыми словами, так как мы понимаем о чем говорим!</div><hr class="hr-faint">
+                                        <div>✅ Кроме диплома лингвистического ВУЗа, компетентность наших преподавателей подтверждается международными сертификатами знания языка, стажировками за границей и т.д.</div><hr class="hr-faint">
+                                        <div>✅ К нам не так просто попасть. Чтобы стать преподавателем в <b class="gradient-fill">englishful</b>, нужно пройти ряд собеседований и знать язык как минимум на <a target=”_blank” href="https://www.efset.org/ru/cefr/c1/">продвинутом уровне <b class="gradient-fill-c1">С1 Advanced</b> по международной шкале CEFR.</a> </div><hr class="hr-faint">
+                                        <div>✅ Да и в конце концов, про достижения преподавателей можно говорить бесконечно. Но ведь самое главное, чтобы преподаватель мог передать свои знания, верно?  Что может подтвердить это лучше, чем <a onclick="document.querySelector('#reviews-section').click()">🌟отзывы🌟</a> довольных учеников?</div>
+                                    </div>
+                                        <div class="margin-top">👉 <span class="date_time">Со списком преподавателей можно ознакомиться <a onclick="document.querySelector('#teachers-section').click();">нажав сюда</a></span></div>
+                                </div>
+                                <hr class="hr-faint-divider">
+
+
+                            {% comment %} Reviews {% endcomment %}
+                                <div class="pricing-card">
+                                    <h3 class="header-margin underline center-basic">Подтверждаем делом, а не словом</h3>
+                                    <div class="included">
+                                        <div>✅ Все, о чем написано выше – не пустые слова. Это подтверждено <a onclick="document.querySelector('#reviews-section').click()">отзывами 🌟</a></div>
+                                    </div>
+                                </div>
+                                <hr class="hr-faint-divider">
+
+                            {% comment %} Partners {% endcomment %}
+                                <div class="pricing-card">
+                                    <h3 class="header-margin underline center-basic">Скидки у партнеров 🤝</h3>
+                                    <div class="included">
+                                        <div>✅ Получайте приятные скидки у <a style="display: inline-block;" onclick="document.querySelector('#partners-section').click()">🔥наших партнеров🔥</a> по промокоду <span class="lvlC1">englishful</span></div>
+                                    </div>
+                                </div>
+                            {% comment %} Convinced? {% endcomment %}
+                            <div style="margin-top: 50px;" class="center-basic prompt-box">
+                                <h3 class="center-basic">Звучит убедительно? 🤔</h3>
+                                <hr class="hr-faint-divider">
+                                <div class="center-basic centered-text">Тогда welcome to <b class="gradient-fill-green">бесплатное</b> пробное занятие!</div>
+                                <div class="center-basic"><button data-target-popup="#popup-container"  class="button button-pricing btn-main-free margin-top margin-bottom">Записаться</button></div>
+                            </div>
+                        </section>
+                    </div>
+
+                {% comment %} Teachers {% endcomment %}
+                    <div data-section="teachers-section" data-type="landingSection" style="display: none;">
+                        <h3 style="text-align:center;" class="faint-border">Они научат вас инглишу 😎</h3>
+                        <section class="pricing-section">
+                            {% comment %} Илья {% endcomment %}
+                                <div class="review-dark">
+
+                                    <div class="review-profile">
+                                        <img style="height: 100px; width: 100px;" src="{% static 'website/images/teachers/profile.jpg' %}" alt="Profile Picture">
+                                        <div class="review-header">
+                                            <h3 class="review-name"> <a target=”_blank” href="https://t.me/wassup21">Илья</a> </h3>
+                                            <div class="review-description"><span class="date_time">Подготовка к собеседованию, общий английский, разговорный английский, подготовка к экзаменам: ЕГЭ, ОГЭ, IETLS</span></div>
+                                        </div>
+                                    </div>
+
+                                    <p class="review-body">         
+                                        <div>⭐ 8 из 9 баллов за <a target=”_blank” href="https://ru.wikipedia.org/wiki/IELTS">международный экзамен IELTS</a></div> <hr class="hr-faint">
+                                        <div>⭐ 5 лет опыта преподавания английского языка</div> <hr class="hr-faint">
+                                        <div>⭐ Выпускник <a target=”_blank” href="https://lunn.ru/programs/5282">НГЛУ им. Н.А. Добролюбова</a></div> <hr class="hr-faint">
+                                        <div>⭐ Призер <a target=”_blank” href="https://vk.com/linguistica?w=wall-23331338_14621">конкурса устного перевода НГЛУ 2022</a></div> <hr class="hr-faint">
+                                        <div>⭐ Студент магистерской программы <a target=”_blank” href="https://nnov.hse.ru/en/ma/global/">Global Business</a> НИУ ВШЭ, <b class="gradient-fill-green">полностью реализуемой на английском языке</b></div> <hr class="hr-faint">
+                                        <div>⭐ Победитель грантового конкурса <a target=”_blank” href="https://nnov.hse.ru/news/638099881.html">Go Global</a> от НИУ ВШЭ, <b class="gradient-fill-green">полностью реализуемого на английском языке</b> </div> <hr class="hr-faint">
+                                    </p>
+
+                                                                         
+                                    {% comment %} Audio card {% endcomment %}
+                                        <div class="flex-center">
+                                            <b class="gradient-fill-c1">Аудиовизитка</b>🎙️
+                                        </div>
+
+                                        <div class="center">
+                                            
+                                            <div class="flex-center audiocard-back">
+                                                <a></a>
+                                                <audio data-audio-element src="{% static 'website/audio/audiocards/ilya_ru.mp3' %}" preload="metadata"></audio>
+                                                <span style="margin-left: 10px;" class="audio-info date_time_smaller"></span>
+                                                <svg class="flag" style="margin-left: 10px;" xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 32 24"><mask id="flagpackRu0" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse">
+                                                    <path fill="#fff" d="M0 0h32v24H0z"/></mask><g fill="none" mask="url(#flagpackRu0)"><path fill="#3D58DB" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/><mask id="flagpackRu1" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><path fill="#fff" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/></mask><g fill-rule="evenodd" clip-rule="evenodd" mask="url(#flagpackRu1)"><path fill="#F7FCFF" d="M0 0v8h32V0H0z"/><path fill="#C51918" d="M0 16v8h32v-8H0z"/></g></g>
+                                                    </svg>
+                                            </div>
+                                            
+                                            <div style="margin-top: 10px;" class="flex-center audiocard-back">
+                                                <a></a>
+                                                <audio onclick="" data-audio-element src="{% static 'website/audio/audiocards/ilya_en.mp3' %}" preload="metadata"></audio>
+                                                <span style="margin-left: 10px;" class="audio-info date_time_smaller"></span>
+                                                <svg class="flag" style="margin-left: 10px;" xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 32 24">
+                                                    <defs><path id="flagpackGbUkm0" fill="#fff" d="M0 0h32v24H0z"/></defs><mask id="flagpackGbUkm1" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><use href="#flagpackGbUkm0"/></mask><g fill="none" mask="url(#flagpackGbUkm1)"><path fill="#2E42A5" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/><mask id="flagpackGbUkm2" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><path fill="#fff" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/></mask><g mask="url(#flagpackGbUkm2)"><mask id="flagpackGbUkm3" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><use href="#flagpackGbUkm0"/></mask><g mask="url(#flagpackGbUkm3)"><path fill="#fff" d="m-3.563 22.285l7.042 2.979l28.68-22.026l3.715-4.426l-7.53-.995l-11.698 9.491l-9.416 6.396l-10.793 8.581z"/><path fill="#F50100" d="M-2.6 24.372L.989 26.1L34.54-1.599h-5.037l-32.102 25.97z"/><path fill="#fff" d="m35.563 22.285l-7.042 2.979L-.159 3.238l-3.715-4.426l7.53-.995l11.698 9.491l9.416 6.396l10.793 8.581z"/><path fill="#F50100" d="m35.323 23.783l-3.588 1.728l-14.286-11.86l-4.236-1.324l-17.445-13.5H.806l17.434 13.18l4.631 1.588l12.452 10.188z"/><mask id="flagpackGbUkm4" fill="#fff"><path fill-rule="evenodd" d="M19.778-2h-7.556V8H-1.972v8h14.194v10h7.556V16h14.25V8h-14.25V-2z" clip-rule="evenodd"/></mask><path fill="#F50100" fill-rule="evenodd" d="M19.778-2h-7.556V8H-1.972v8h14.194v10h7.556V16h14.25V8h-14.25V-2z" clip-rule="evenodd"/><path fill="#fff" d="M12.222-2v-2h-2v2h2zm7.556 0h2v-2h-2v2zM12.222 8v2h2V8h-2zM-1.972 8V6h-2v2h2zm0 8h-2v2h2v-2zm14.194 0h2v-2h-2v2zm0 10h-2v2h2v-2zm7.556 0v2h2v-2h-2zm0-10v-2h-2v2h2zm14.25 0v2h2v-2h-2zm0-8h2V6h-2v2zm-14.25 0h-2v2h2V8zm-7.556-8h7.556v-4h-7.556v4zm2 8V-2h-4V8h4zm-16.194 2h14.194V6H-1.972v4zm2 6V8h-4v8h4zm12.194-2H-1.972v4h14.194v-4zm2 12V16h-4v10h4zm5.556-2h-7.556v4h7.556v-4zm-2-8v10h4V16h-4zm16.25-2h-14.25v4h14.25v-4zm-2-6v8h4V8h-4zm-12.25 2h14.25V6h-14.25v4zm-2-12V8h4V-2h-4z" mask="url(#flagpackGbUkm4)"/></g></g></g>
+                                                </svg>
+                                            </div>
+
+                                        </div>
+
+                                    <div class="center-basic"><button data-target-popup="#popup-container" style="text-transform: uppercase;" class="button button-pricing btn-sub-free margin-top margin-bottom">Первое занятие бесплатно</button></div>
+                                </div>
+
+                            <hr class="hr-faint-divider">
+
+                            {% comment %} Denis {% endcomment %}
+                                <div class="review-dark">
+
+                                    <div class="review-profile">
+                                        <img style="height: 100px; width: 100px;" src="{% static 'website/images/teachers/denis.jpg' %}" alt="Profile Picture">
+                                        <div class="review-header">
+                                            <h3 class="review-name">Денис</h3>
+                                            <div class="review-description"><span class="date_time">Общий английский, разговорный английский, подготовка к экзаменам: ЕГЭ, ОГЭ</span></div>
+                                        </div>
+                                    </div>
+            
+                                    <p class="review-body">
+                                        <div>⭐ 3 года опыта преподавания английского языка в онлайн-школе</div> <hr class="hr-faint">
+                                        <div>⭐ Выпускник <a target=”_blank” href="https://lunn.ru/programs/5282">НГЛУ им. Н.А. Добролюбова</a></div> <hr class="hr-faint">
+                                        <div>⭐ Имеет опыт работы с одарёнными детьми в региональном центре</div> <hr class="hr-faint">
+                                        <div>⭐ Занимался в театральной студии, знает техники визуальной подачи материала</div>
+                                    </p>
+
+                                    {% comment %} Audio card {% endcomment %}
+                                    <div class="flex-center">
+                                        <b class="gradient-fill-c1">Аудиовизитка</b>🎙️
+                                    </div>
+
+                                    <div class="center">
+                                        
+                                        <div class="flex-center audiocard-back">
+                                            <a></a>
+                                            <audio data-audio-element src="{% static 'website/audio/audiocards/denis_ru.mp3' %}" preload="metadata"></audio>
+                                            <span style="margin-left: 10px;" class="audio-info date_time_smaller"></span>
+                                            <svg class="flag" style="margin-left: 10px;" xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 32 24"><mask id="flagpackRu0" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse">
+                                                <path fill="#fff" d="M0 0h32v24H0z"/></mask><g fill="none" mask="url(#flagpackRu0)"><path fill="#3D58DB" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/><mask id="flagpackRu1" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><path fill="#fff" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/></mask><g fill-rule="evenodd" clip-rule="evenodd" mask="url(#flagpackRu1)"><path fill="#F7FCFF" d="M0 0v8h32V0H0z"/><path fill="#C51918" d="M0 16v8h32v-8H0z"/></g></g>
+                                                </svg>
+                                        </div>
+                                        
+                                        <div style="margin-top: 10px;" class="flex-center audiocard-back">
+                                            <a></a>
+                                            <audio data-audio-element src="{% static 'website/audio/audiocards/denis_en.mp3' %}" preload="metadata"></audio>
+                                            <span style="margin-left: 10px;" class="audio-info date_time_smaller"></span>
+                                            <svg class="flag" style="margin-left: 10px;" xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 32 24">
+                                                <defs><path id="flagpackGbUkm0" fill="#fff" d="M0 0h32v24H0z"/></defs><mask id="flagpackGbUkm1" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><use href="#flagpackGbUkm0"/></mask><g fill="none" mask="url(#flagpackGbUkm1)"><path fill="#2E42A5" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/><mask id="flagpackGbUkm2" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><path fill="#fff" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/></mask><g mask="url(#flagpackGbUkm2)"><mask id="flagpackGbUkm3" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><use href="#flagpackGbUkm0"/></mask><g mask="url(#flagpackGbUkm3)"><path fill="#fff" d="m-3.563 22.285l7.042 2.979l28.68-22.026l3.715-4.426l-7.53-.995l-11.698 9.491l-9.416 6.396l-10.793 8.581z"/><path fill="#F50100" d="M-2.6 24.372L.989 26.1L34.54-1.599h-5.037l-32.102 25.97z"/><path fill="#fff" d="m35.563 22.285l-7.042 2.979L-.159 3.238l-3.715-4.426l7.53-.995l11.698 9.491l9.416 6.396l10.793 8.581z"/><path fill="#F50100" d="m35.323 23.783l-3.588 1.728l-14.286-11.86l-4.236-1.324l-17.445-13.5H.806l17.434 13.18l4.631 1.588l12.452 10.188z"/><mask id="flagpackGbUkm4" fill="#fff"><path fill-rule="evenodd" d="M19.778-2h-7.556V8H-1.972v8h14.194v10h7.556V16h14.25V8h-14.25V-2z" clip-rule="evenodd"/></mask><path fill="#F50100" fill-rule="evenodd" d="M19.778-2h-7.556V8H-1.972v8h14.194v10h7.556V16h14.25V8h-14.25V-2z" clip-rule="evenodd"/><path fill="#fff" d="M12.222-2v-2h-2v2h2zm7.556 0h2v-2h-2v2zM12.222 8v2h2V8h-2zM-1.972 8V6h-2v2h2zm0 8h-2v2h2v-2zm14.194 0h2v-2h-2v2zm0 10h-2v2h2v-2zm7.556 0v2h2v-2h-2zm0-10v-2h-2v2h2zm14.25 0v2h2v-2h-2zm0-8h2V6h-2v2zm-14.25 0h-2v2h2V8zm-7.556-8h7.556v-4h-7.556v4zm2 8V-2h-4V8h4zm-16.194 2h14.194V6H-1.972v4zm2 6V8h-4v8h4zm12.194-2H-1.972v4h14.194v-4zm2 12V16h-4v10h4zm5.556-2h-7.556v4h7.556v-4zm-2-8v10h4V16h-4zm16.25-2h-14.25v4h14.25v-4zm-2-6v8h4V8h-4zm-12.25 2h14.25V6h-14.25v4zm-2-12V8h4V-2h-4z" mask="url(#flagpackGbUkm4)"/></g></g></g>
+                                            </svg>
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="center-basic"><button data-target-popup="#popup-container" style="text-transform: uppercase;" class="button button-pricing btn-sub-free margin-top margin-bottom">Первое занятие бесплатно</button></div>
+                                </div>
+
+                            <hr class="hr-faint-divider">
+
+                            {% comment %} Yana {% endcomment %}
+                            <div class="review-dark">
+
+                                <div class="review-profile">
+                                    <img style="height: 100px; width: 100px;" src="{% static 'website/images/teachers/yana.jpg' %}" alt="Profile Picture">
+                                    <div class="review-header">
+                                        <h3 class="review-name">Яна</h3>
+                                        <div class="review-description"><span class="date_time">Подготовка к собеседованию, общий английский, разговорный английский</span></div>
+                                    </div>
+                                </div>
+        
+                                <p class="review-body">
+                                    <div>⭐ 6 лет опыта преподавания английского языка</div> <hr class="hr-faint">
+                                    <div>⭐ Выпускник <a target=”_blank” href="https://lunn.ru/programs/5282">НГЛУ им. Н.А. Добролюбова</a></div> <hr class="hr-faint">
+                                    <div>⭐ Три раза была в США по программе <b class="gradient-fill-green">Work and Travel</b></div> <hr class="hr-faint">
+                                    <div>⭐ Живет и работает в Австрии</div> <hr class="hr-faint">
+                                    <div>⭐ Студентка <a target="”_blank”" href="https://www.univie.ac.at/en/">Венского университета</a></div> <hr class="hr-faint">
+                                    <div>⭐ Прошла профессиональную переподготовку <span class="date_time">(РКИ с упором на методику преподавания)</span></div> <hr class="hr-faint">
+                                </p>
+
+                                {% comment %} Audio card {% endcomment %}
+                                    <div class="flex-center">
+                                        <b class="gradient-fill-c1">Аудиовизитка</b>🎙️
+                                    </div>
+
+                                    <div class="center">
+                                        
+                                        <div class="flex-center audiocard-back">
+                                            <a></a>
+                                            <audio data-audio-element src="{% static 'website/audio/audiocards/yana_ru.mp3' %}" preload="metadata"></audio>
+                                            <span style="margin-left: 10px;" class="audio-info date_time_smaller"></span>
+                                            <svg class="flag" style="margin-left: 10px;" xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 32 24"><mask id="flagpackRu0" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse">
+                                                <path fill="#fff" d="M0 0h32v24H0z"/></mask><g fill="none" mask="url(#flagpackRu0)"><path fill="#3D58DB" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/><mask id="flagpackRu1" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><path fill="#fff" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/></mask><g fill-rule="evenodd" clip-rule="evenodd" mask="url(#flagpackRu1)"><path fill="#F7FCFF" d="M0 0v8h32V0H0z"/><path fill="#C51918" d="M0 16v8h32v-8H0z"/></g></g>
+                                                </svg>
+                                        </div>
+                                        
+                                        <div style="margin-top: 10px;" class="flex-center audiocard-back">
+                                            <a></a>
+                                            <audio data-audio-element src="{% static 'website/audio/audiocards/yana_en.mp3' %}" preload="metadata"></audio>
+                                            <span style="margin-left: 10px;" class="audio-info date_time_smaller"></span>
+                                            <svg class="flag" style="margin-left: 10px;" xmlns="http://www.w3.org/2000/svg" width="40" height="30" viewBox="0 0 32 24">
+                                                <defs><path id="flagpackGbUkm0" fill="#fff" d="M0 0h32v24H0z"/></defs><mask id="flagpackGbUkm1" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><use href="#flagpackGbUkm0"/></mask><g fill="none" mask="url(#flagpackGbUkm1)"><path fill="#2E42A5" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/><mask id="flagpackGbUkm2" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><path fill="#fff" fill-rule="evenodd" d="M0 0v24h32V0H0z" clip-rule="evenodd"/></mask><g mask="url(#flagpackGbUkm2)"><mask id="flagpackGbUkm3" width="32" height="24" x="0" y="0" maskUnits="userSpaceOnUse"><use href="#flagpackGbUkm0"/></mask><g mask="url(#flagpackGbUkm3)"><path fill="#fff" d="m-3.563 22.285l7.042 2.979l28.68-22.026l3.715-4.426l-7.53-.995l-11.698 9.491l-9.416 6.396l-10.793 8.581z"/><path fill="#F50100" d="M-2.6 24.372L.989 26.1L34.54-1.599h-5.037l-32.102 25.97z"/><path fill="#fff" d="m35.563 22.285l-7.042 2.979L-.159 3.238l-3.715-4.426l7.53-.995l11.698 9.491l9.416 6.396l10.793 8.581z"/><path fill="#F50100" d="m35.323 23.783l-3.588 1.728l-14.286-11.86l-4.236-1.324l-17.445-13.5H.806l17.434 13.18l4.631 1.588l12.452 10.188z"/><mask id="flagpackGbUkm4" fill="#fff"><path fill-rule="evenodd" d="M19.778-2h-7.556V8H-1.972v8h14.194v10h7.556V16h14.25V8h-14.25V-2z" clip-rule="evenodd"/></mask><path fill="#F50100" fill-rule="evenodd" d="M19.778-2h-7.556V8H-1.972v8h14.194v10h7.556V16h14.25V8h-14.25V-2z" clip-rule="evenodd"/><path fill="#fff" d="M12.222-2v-2h-2v2h2zm7.556 0h2v-2h-2v2zM12.222 8v2h2V8h-2zM-1.972 8V6h-2v2h2zm0 8h-2v2h2v-2zm14.194 0h2v-2h-2v2zm0 10h-2v2h2v-2zm7.556 0v2h2v-2h-2zm0-10v-2h-2v2h2zm14.25 0v2h2v-2h-2zm0-8h2V6h-2v2zm-14.25 0h-2v2h2V8zm-7.556-8h7.556v-4h-7.556v4zm2 8V-2h-4V8h4zm-16.194 2h14.194V6H-1.972v4zm2 6V8h-4v8h4zm12.194-2H-1.972v4h14.194v-4zm2 12V16h-4v10h4zm5.556-2h-7.556v4h7.556v-4zm-2-8v10h4V16h-4zm16.25-2h-14.25v4h14.25v-4zm-2-6v8h4V8h-4zm-12.25 2h14.25V6h-14.25v4zm-2-12V8h4V-2h-4z" mask="url(#flagpackGbUkm4)"/></g></g></g>
+                                            </svg>
+                                        </div>
+
+                                    </div>
+
+                                <div class="center-basic"><button data-target-popup="#popup-container" style="text-transform: uppercase;" class="button button-pricing btn-sub-free margin-top margin-bottom">Первое занятие бесплатно</button></div>
+                            </div>
+
+                        </section>
+                    </div>
+
+                {% comment %} Reviews {% endcomment %}
+                    <div data-section="reviews-section" data-type="landingSection" style="display: none;">
+                        <h3 style="text-align:center;" class="faint-border">Отзывы довольных клиентов 🤩</h3>
+                        <section class="pricing-section">
+                        {% for review in reviews %}
+                            <div class="review-dark">
+                                <div class="review-profile">
+                                    {% if review.img %}
+                                    <img src="{% static 'website/images/reviews/' %}{{review.img}}" alt="Profile Picture">
+                                    {% endif %}
+                                    <div class="review-header">
+                                        <div style="line-height: normal;" class="review-name"> <a target=”_blank” href="{{review.social}}">{{review.name}}</a></div>
+                                        {% if review.bio %}<div style="line-height: normal;"><span class="date_time">{{review.bio|safe}}</span></div>{% endif %}
+                                        <div class="review-description smaller"> <div class="date_time">{{review.service}}</div></div>
+                                    </div>
+                                </div>
+                                    <p class="review-body">{{review.body|safe}}</p>
+                            </div>
+                                {% if not forloop.last %}
+                                    <hr class="hr-faint-divider">
+                                {% endif %}
+                        {% endfor %}
+                        </section>
+                    </div>
+
+                {% comment %} Prices {% endcomment %}
+                    <div data-section="prices-section" data-type="landingSection" style="display: none;">
+                        <h3 style="text-align:center;" class="faint-border">Выберите формат занятий, который подходит именно вам</h3>
+                        <section class="pricing-section">
+                            <div class="wrapper-prices margin-bottom">
+                                <a href="#prices-section/#individual-section" class="button-about-services" data-type="pricingButton" data-corresponding="individual-section">Индивидуальные</a>
+                                <a href="#prices-section/#group-section" class="button-about-services" data-type="pricingButton" data-corresponding="group-section">Групповые</a>
+                                <a href="#prices-section/#ege-mock-section" class="button-about-services" data-type="pricingButton" data-corresponding="ege-mock-section">Пробный экзамен ЕГЭ</a>
+                                <a href="#prices-section/#corporate-section" class="button-about-services" data-type="pricingButton" data-corresponding="corporate-section">Корпоративный английский</a>
+                                <a href="#prices-section/#interview-section" class="button-about-services" data-type="pricingButton" data-corresponding="interview-section">Подготовка к собеседованию</a>
+                            </div>
+                    
+                            {% comment %} Пробник {% endcomment %}
+                                <div data-section="ege-mock-section" data-type="pricingSection" style="display: none;" class="pricing-card">
+                                    <h2 class="header-margin underline center-basic">Пробный экзамен ЕГЭ</h2>
+
+                                    <div class="wrapper">
+
+                                        <div class="pricing-main">
+                                            <h3><span class="lvlC1">Абонемент</span></h3>
+                                            <div class="smaller text-left">
+                                                <div>✅ Обратная связь по результатам пробника</div>
+                                                <div>✅ Рекоммендации по дальнейшей подготовке</div>
+                                                <div>✅ Материалы для подготовки к ЕГЭ</div>
+                                                <div>✅ Ответы на ваши вопросы касательно материалов для подготовки</div>
+                                                <div>✅ Повторное написание пробника и подробное сравнение результатов</div>
+                                            </div>
+                                            <hr class="hr-faint">
+                                            <div class="smaller">₽1900 за пробник</div>
+                                            <span class="date_time">предложение актуально при покупке от 3 пробников за раз</span>
+                                            <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Записаться</button></div> 
+                                        </div>
+
+                                        <div class="pricing-main">
+                                            <h3><span class="feature">Плюс</span></h3>
+                                            <div class="smaller text-left">
+                                                <div>✅ Обратная связь по результатам пробника</div>
+                                                <div>✅ Рекоммендации по дальнейшей подготовке</div>
+                                                <div>✅ Материалы для подготовки к ЕГЭ</div>
+                                                <div>✅ Ответы на ваши вопросы касательно материалов для подготовки</div>
+                                                <div>✅ Повторное написание пробника и подробное сравнение результатов</div>
+                                            </div>
+                                            <hr class="hr-faint">
+                                            <div class="smaller">₽4400 за два пробника</div>
+                                            <span class="date_time">решение двух пробников + обратная связь после каждого</span>
+                                            <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Записаться</button></div>
+                                        </div>
+
+                                        <div class="pricing-main">
+                                            <h3>Стандарт</h3>
+                                            <div class="smaller text-left">
+                                                <div>✅ Обратная связь по результатам пробника</div>
+                                                <div>✅ Рекоммендации по дальнейшей подготовке</div>
+                                                <div>✅ Материалы для подготовки к ЕГЭ</div>
+                                            </div>
+                                            <hr class="hr-faint">
+                                            <div class="smaller">₽2400 за пробник</div>
+                                            <span class="date_time">решение одного пробника + обратная связь</span> 
+                                            <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Записаться</button></div>
+                                        </div>
+                                    </div>
+
+                                    <div class="pains-header">Почему стоит написать пробник у нас?</div>
+                                    <div class="included">
+                                        <div>✅ Учтены изменения 2023г – подсчет первичных и вторичных баллов</div>
+                                        <div>✅ Письменную часть вы решаете самостоятельно – аудирование встроено в тест</div>
+                                        <div>✅ Устную часть вы решаете самостоятельно – реализована запись ответа как на ЕГЭ</div>
+                                        <div>✅ Вы получаете обратную связь по вашему результату, ценные рекоммендации и материалы для дальнейший подготовки</div>
+                                    </div>
+                                    
+                                    <div class="pains-header">Как все проходит?</div>
+                                        <div class="included">
+                                            <ol>
+                                                <li>Для вас создается аккаунт</li>
+                                                <li>Вы заходите на сайт и решаете пробник в любое удобное время (письменную + устную часть)</li>
+                                                <li>Мы проверяем вашу работу</li>
+                                                <li>Вы получаете результаты</li>
+                                                <li>Мы созваниваемся, обсуждаем ваш результат, что можно улучшить и ваш дальнейший план подготовки. Вы получаете материалы для подготовки</li>
+                                                <li>Вы ознакамливаетесь с материалами, задаете любые интересующие вас вопросы. Мы открываем вам доступ к следующему пробнику, пункты 2-5 повторяются</li>
+                                                <span class="date_time">Шестой пункт актуален только при покупке пакетов "Плюс" или "Абонемент"</span>
+                                            </ol>
+                                    </div>
+                                    <hr class="hr-faint">
+                                    {% comment %} <div>👉 Подробнее про то, как все проходит – <a>в этом видео</a></div> {% endcomment %}
+                                    
+                                    <div><button data-target-popup="#popup-container" class="button button-pricing btn-main-free margin-top margin-bottom">Записаться</button></div>
+                                </div>
+
+                            {% comment %} Групповые {% endcomment %}
+                                <div data-section="group-section" data-type="pricingSection" style="display: none;" class="pricing-card">
+                                    <h2 class="header-margin underline center-basic">Групповые занятия</h2>
+                                    
+                                    
+                                    <div class="wrapper">
+
+                                        <div class="pricing-main">
+                                            <h3>Стандарт</h3>
+                                            <div class="smaller text-left">
+                                                <div>✅ Бесплатный тест уровня языка</div>
+                                                <div>✅ Бесплатное пробное занятие</div>
+                                                <div>🔥 Скидка <span class="lvlC1">10%</span>на дальнейшее обучение за окончание курса</div>
+                                                <span class="date_time">Скидка действует на курс групповых занятий или на пакет из 5 индивидуальных занятий</span>
+                                            </div>
+                                            <hr class="hr-faint">
+                                            <div class="smaller">Занятие 90 минут - ₽900</div>
+                                            <span class="date_time">Занятия проходят два раза в неделю</span>
+                                            <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Попробовать бесплатно</button></div> 
+                                        </div>
+                                    
+                                    </div>
+                                    
+                                    <div class="pains-header">Как проходят групповые занятия? Как набираются группы?</div>
+                                        <div class="included">
+                                            <div>✅ Групповые занятия длятся по <b>90 минут</b>, занятия проходят <b>два раза в неделю</b></div>
+                                            <div>✅ Группы набираются по итогам <b>бесплатного</b> тестирования уровня языка</div>
+                                            <div>✅ Есть возможность нагнать и присоединиться к уже существующей группе путем интенсивного курса индивидуальных занятий</div>
+                                            <div>✅ Средняя продолжительность курса групповых занятий 4-6 месяцев. Мы считаем, что нам нужно именно столько, чтобы поднять уровень вашего английского на одну ступень.</div>
+                                            <span class="date_time">Ожидается, что за курс групповых занятий у нас получится повысить ваш уровень с <span style="color: white;" class="lvlA">A1</span>до  <span style="color: white;" class="lvlA">A2</span>или с <span style="color: white;" class="lvlA">A2</span>до <span style="color: white;" class="lvlB1">B1</span> и т.д. </span>
+                                            <div>✍ По итогам курса вы сдаете экзамен: аудирование, чтение, грамматика, письмо и говорение</div>
+                                            <span class="date_time">Разумеется, каждый ученик получает индивидуальную обратную связь по итогам экзамена, а также рекоммендации по дальнейшему изучению языка</span>
+                                        </div>
+
+                                    
+                                        <div class="pains-header">Что входит в услугу?</div>
+                                        <div class="included">
+                                            <div>✅ Личный кабинет ученика</div>
+                                            <div>✅ Бесплатный тест уровня языка</div>
+                                            <div>✅ Бесплатное пробное занятие</div>
+                                            <div>✅ Учебный план</div>
+                                            <div>✅ Личный словарь</div>
+                                            <div>✅ Тесты с моментальной проверкой и сохранением результата</div>
+                                            <div>✅ Доступ к теории</div>
+                                            <div>✅ Ведение + редактирование записей материалов занятий</div>
+                                            <div>✅ Помощь и ответы на вопросы в Telegram</div>
+                                            <div>✅ <b>Разговорные клубы</b></div>
+                                            <div>✅ Ведение и редактирование словаря🔥</div>
+                                        </div>
+
+                                        <hr class="hr-faint">
+                                        {% comment %} <div>👉 Подробнее про групповые занятия – <a>в этом видео</a></div> {% endcomment %}
+                                        <div><button data-target-popup="#popup-container" class="button button-pricing btn-main-free margin-top margin-bottom">Попробовать бесплатно</button></div>
+                                    
+                                </div>
+                            
+                            {% comment %} Индивидуальные {% endcomment %}
+                                <div data-section="individual-section" data-type="pricingSection" style="display: none;" class="pricing-card">
+                                    <h2 class="header-margin underline center-basic">Индивидуальные занятия</h2>
+                                    
+                                    <div class="wrapper">
+                                        
+                                        <div class="pricing-main">
+                                            <h3>Стандарт</h3>
+                                            <div class="smaller text-left">
+                                                <div>✅ Индивидуальный подход</div>
+                                                <div>✅ Ведение и редактирование записей на занятии</div>
+                                                <div>✅ Регулярная обратная связь</div>
+                                                <div>❌ Ведение и редактирование словаря</div>
+                                                <div>❌ Без отмены занятий</div>
+                                            </div>
+                                            <hr class="hr-faint">
+                                            <div class="smaller">45 минут - ₽1000</div>
+                                            <div class="smaller">60 минут - ₽1300</div>
+                                            <div class="smaller">90 минут - ₽1800</div>
+                                            <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Попробовать бесплатно</button></div> 
+                                        </div>
+
+                                        <div class="pricing-main">
+                                            <h3><span class="feature">Плюс</span></h3>
+                                            <div class="smaller text-left">
+                                                <div>✅ Индивидуальный подход</div>
+                                                <div>✅ Ведение и редактирование записей на занятии</div>
+                                                <div>✅ Регулярная обратная связь</div>
+                                                <div>🔥 Ведение и редактирование словаря</div>
+                                                <div>✅ 2 отмены в месяц</div>
+                                            </div>
+                                            <hr class="hr-faint">
+                                            <div class="smaller">45 минут - ₽1500</div>
+                                            <div class="smaller">60 минут - ₽1800</div>
+                                            <div class="smaller">90 минут - ₽2300</div>
+                                            <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Попробовать бесплатно</button></div>
+                                        </div>
+
+                                    </div>
+                                    
+                                    <hr class="hr-faint">
+                                    <table id="pricing">
+                                        <thead>
+                                            <tr>
+                                                <th>Опция</th>
+                                                <th>Стандарт</th>
+                                                <th><span class="feature">Плюс</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Личный кабинет ученика</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Бесплатный тест уровня языка</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Бесплатное пробное занятие</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Индивидуальный учебный план</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Личный словарь</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Тесты с моментальной проверкой и сохранением результата</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Доступ к теории</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ведение и редактирование записей материалов занятий</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Помощь и ответы на вопросы в Telegram</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Разговорные клубы</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ведение и редактирование словаря</td>
+                                                <td>❌</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Отмена занятий</td>
+                                                <td>❌</td>
+                                                <td>✅</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                        
+                                    <hr class="hr-faint">
+                                
+                                    <div><button data-target-popup="#popup-container" class="button button-pricing btn-main-free margin-top margin-bottom">Попробовать бесплатно</button></div> 
+                                </div>
+                            {% comment %} Корпоративный английский {% endcomment %}
+                                <div data-section="corporate-section" data-type="pricingSection" style="display: none;" class="pricing-card">
+                                    <h2 class="header-margin underline center-basic">Корпоративный английский</h2>
+                                    
+                                    <div class="wrapper">
+                                        
+                                        <div class="pricing-main">
+                                            <h3>Стандарт</h3>
+                                            <div class="smaller text-left">
+                                                <div>✅ Бесплатно протестируем уровень ваших сотрудников</div>
+                                                <div>✅ Индивидуальный формат занятий</div>
+                                                <div>✅ Групповые занятия</div>
+                                                <div>✅ Ведение и редактирование записей занятий</div>
+                                                <div>✅ Регулярная обратная связь для каждого обучающегося</div>
+                                                <div>✅ Скидки на обучение в школе для детей сотрудников</div>
+                                                <div>❌ Ведение и редактирование словаря</div>
+                                                <div>❌ Без отмен</div>
+                                            </div>
+                                            <hr class="hr-faint">
+                                            <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Узнать подробнее</button></div> 
+                                        </div>
+
+                                        <div class="pricing-main">
+                                            <h3><span class="feature">Плюс</span></h3>
+                                            <div class="smaller text-left">
+                                                <div>✅ Бесплатно протестируем уровень ваших сотрудников</div>
+                                                <div>✅ Индивидуальный формат занятий</div>
+                                                <div>✅ Групповые занятия</div>
+                                                <div>✅ Ведение и редактирование записей занятий</div>
+                                                <div>✅ Регулярная обратная связь для каждого обучающегося</div>
+                                                <div>✅ Скидки на обучение в школе для детей сотрудников</div>
+                                                <div>🔥 Ведение и редактирование словаря</div>
+                                                <div>✅ Отмена занятий</div>
+                                            </div>
+                                            <hr class="hr-faint">
+                                            <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Узнать подробнее</button></div>  
+                                        </div>
+
+                                    </div>
+                                    
+                                    <hr class="hr-faint">
+                                    <table id="pricing">
+                                        <thead>
+                                            <tr>
+                                                <th>Опция</th>
+                                                <th>Стандарт</th>
+                                                <th><span class="feature">Плюс</span></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Личный кабинет</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Бесплатный тест уровня языка</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Индивидуальный учебный план</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Личный словарь</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Тесты с моментальной проверкой и сохранением результата</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Доступ к теории</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ведение и редактирование записей материалов занятий</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Помощь и ответы на вопросы в Telegram</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Разговорные клубы</td>
+                                                <td>✅</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Ведение и редактирование словаря</td>
+                                                <td>❌</td>
+                                                <td>✅</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Отмена занятий</td>
+                                                <td>❌</td>
+                                                <td>✅</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                        
+                                    <hr class="hr-faint">
+                                    {% comment %} <div>👉 Подробнее про индививидуальные занятия – <a>в этом видео</a></div> {% endcomment %}
+                                
+                                    <div><button data-target-popup="#popup-container" class="button button-pricing btn-main-free margin-top margin-bottom">Узнать подробнее</button></div>
+                                </div>
+                            {% comment %} Подготовка к собеседованию {% endcomment %}
+                            <div data-section="interview-section" data-type="pricingSection" style="display: none;" class="pricing-card">
+                                <h2 class="header-margin underline center-basic">Подготовка к собеседованию</h2>
+                                
+                                <div class="info-dark margin-top">
+                                    <div>😥 Предстоит собеседование на английском для получения работы или визы❓</div> <hr class="hr-faint">
+                                    <div>🙄 Не знаете как готовиться и чего ожидать❓</div> <hr class="hr-faint">
+                                    <div>😎 Не проблема, поможем вам подготовиться даже в краткие сроки. Найдем решение под ваши цели.</div> <hr class="hr-faint">
+                                    <div class="included">✅ Наши преподаватели имеют успешный опыт прохождения собеседований для получения визы и трудоустройства в международные компании</div> <hr class="hr-faint-divider">
+                                    <div class="included">✅ Подберем преподавателя с подходящим бэкграундом: финансы, менеджмент или ИТ</div>
+                                    <hr class="hr-faint">
+                                    <div class="center-basic">
+                                        Преподаватели <b class="gradient-fill">englishful</b> помогут вам в достижении ваших целей❗
+                                    </div>
+                                </div>
+                                <div class="wrapper">
+                                    
+                                    <div class="pricing-main">
+                                        <h3>Стандарт</h3>
+                                        <div class="smaller text-left">
+                                            <div>✅ Бесплатное тестирование уровеня языка</div>
+                                            <div>✅ Бесплатное пробное занятие</div>
+                                            <div>✅ Ведение и редактирование записей занятий</div>
+                                            <div>❌ Без отмен</div>
+                                            <div>❌ Пробные интервью с разными преподавателями для выхода из зоны комфорта и максимально эффективной подготовки</div>
+                                            <div>❌ Начало занятий в день обращения</div>
+                                            <div>❌ Ведение и редактирование словаря</div>
+                                        </div>
+                                        <hr class="hr-faint">
+                                        <div class="smaller">45 минут - ₽1000</div>
+                                        <div class="smaller">60 минут - ₽1300</div>
+                                        <div class="smaller">90 минут - ₽1800</div>
+                                        <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Попробовать бесплатно</button></div> 
+                                    </div>
+
+                                    <div class="pricing-main">
+                                        <h3><span class="feature">Плюс</span></h3>
+                                        <div class="smaller text-left">
+                                            <div>✅ Бесплатное тестирование уровеня языка</div>
+                                            <div>✅ Бесплатное пробное занятие</div>
+                                            <div>✅ Ведение и редактирование записей занятий</div>
+                                            <div>✅ Отмена занятий</div>
+                                            <div>🔥 Пробные интервью с разными преподавателями для выхода из зоны комфорта и максимально эффективной подготовки</div>
+                                            <div>🔥 Начало занятий в день обращения</div>
+                                            <div>🔥 Ведение и редактирование словаря</div>
+                                        </div>
+                                        <hr class="hr-faint">
+                                        <div class="smaller">45 минут - ₽1500</div>
+                                        <div class="smaller">60 минут - ₽1800</div>
+                                        <div class="smaller">90 минут - ₽2300</div>
+                                        <div><button data-target-popup="#popup-container" class="button button-pricing btn-sub-free margin-top margin-bottom">Попробовать бесплатно</button></div>
+                                    </div>
+
+                                </div>
+                                
+                                <hr class="hr-faint">
+                                <table id="pricing">
+                                    <thead>
+                                        <tr>
+                                            <th>Опция</th>
+                                            <th>Стандарт</th>
+                                            <th><span class="feature">Плюс</span></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Личный кабинет</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Бесплатный тест уровня языка</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Бесплатное пробное занятие</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Индивидуальный учебный план</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Личный словарь</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Тесты с моментальной проверкой и сохранением результата</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Доступ к теории</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ведение и редактирование записей материалов занятий</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Помощь и ответы на вопросы в Telegram</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Разговорные клубы</td>
+                                            <td>✅</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ведение и редактирование словаря</td>
+                                            <td>❌</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Отмена занятий</td>
+                                            <td>❌</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Первое занятие в день обращения</td>
+                                            <td>❌</td>
+                                            <td>✅</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Пробные интервью с разными преподавателями</td>
+                                            <td>❌</td>
+                                            <td>✅</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                    
+                                <hr class="hr-faint">
+                                {% comment %} <div>👉 Подробнее про индививидуальные занятия – <a>в этом видео</a></div> {% endcomment %}
+                            
+                                <div><button data-target-popup="#popup-container" class="button button-pricing btn-main-free margin-top margin-bottom">Попробовать бесплатно</button></div>  
+                            </div>
+                        </section>
+                        </div>
+
+                {% comment %} Partners {% endcomment %}
+                    <div data-section="partners-section" data-type="landingSection" style="display: none;">
+                        <h3 style="text-align:center;" class="faint-border">Наши партнеры</h3>
+                        <section class="pricing-section">
+                            {% comment %} ng.consulting {% endcomment %}
+                                <div class="review-dark">
+                                    <div class="review-profile">
+                                        <img style="height: 100px; width: 100px;" src="{% static 'website/images/partners/ng_consulting.jpg' %}" alt="invaderLogo">
+                                        <div class="review-header">
+                                            <h3 class="review-name"> <a target=”_blank” href="https://ng.consulting/">ng.consulting</a></h3>
+                                            <div class="review-description"> Помощь в масштабировании Frontend приложений</div>
+                                        </div>
+                                    </div>
+
+                                    <p class="review-body">         
+                                        <div>⭐ Автоматизация миграций кодовой базы</div><hr class="hr-faint">
+                                        <div>⭐ Оптимизация локальной разработки и CI/CD </div><hr class="hr-faint">
+                                        <div>⭐ Улучшение Developer Experience проектов масштаба от стартапа до корпорации</div><hr class="hr-faint">
+                                        <div>⭐ Аудит проекта и список потенциальных улучшений кодовой базы</div><hr class="hr-faint">
+                                        
+                                        <div style="padding-bottom: 15px;" class="partner-links underline">
+                                            <a target=”_blank” class="social" href="https://github.com/angularwave">
+                                                <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2A10 10 0 0 0 2 12c0 4.42 2.87 8.17 6.84 9.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34c-.46-1.16-1.11-1.47-1.11-1.47c-.91-.62.07-.6.07-.6c1 .07 1.53 1.03 1.53 1.03c.87 1.52 2.34 1.07 2.91.83c.09-.65.35-1.09.63-1.34c-2.22-.25-4.55-1.11-4.55-4.92c0-1.11.38-2 1.03-2.71c-.1-.25-.45-1.29.1-2.64c0 0 .84-.27 2.75 1.02c.79-.22 1.65-.33 2.5-.33c.85 0 1.71.11 2.5.33c1.91-1.29 2.75-1.02 2.75-1.02c.55 1.35.2 2.39.1 2.64c.65.71 1.03 1.6 1.03 2.71c0 3.82-2.34 4.66-4.57 4.91c.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2Z"/></svg>
+                                            </a>
+
+                                            <a target=”_blank” class="social" href="https://medium.com/angularwave">
+                                                <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <g fill="none"><path d="M24 0v24H0V0h24ZM12.593 23.258l-.011.002l-.071.035l-.02.004l-.014-.004l-.071-.035c-.01-.004-.019-.001-.024.005l-.004.01l-.017.428l.005.02l.01.013l.104.074l.015.004l.012-.004l.104-.074l.012-.016l.004-.017l-.017-.427c-.002-.01-.009-.017-.017-.018Zm.265-.113l-.013.002l-.185.093l-.01.01l-.003.011l.018.43l.005.012l.008.007l.201.093c.012.004.023 0 .029-.008l.004-.014l-.034-.614c-.003-.012-.01-.02-.02-.022Zm-.715.002a.023.023 0 0 0-.027.006l-.006.014l-.034.614c0 .012.007.02.017.024l.015-.002l.201-.093l.01-.008l.004-.011l.017-.43l-.003-.012l-.01-.01l-.184-.092Z"/><path fill="currentColor" d="M8 6a6 6 0 1 1 0 12A6 6 0 0 1 8 6Zm9 1c1.5 0 2.5 2.239 2.5 5s-1 5-2.5 5s-2.5-2.239-2.5-5s1-5 2.5-5Zm4 .5c.38 0 .712.827.88 2.246l.047.443l.019.235l.03.494l.01.259l.012.541L22 12l-.002.282l-.012.541l-.01.26l-.03.493l-.02.235l-.045.443c-.169 1.42-.5 2.246-.881 2.246c-.38 0-.712-.827-.88-2.246l-.047-.443a16.683 16.683 0 0 1-.019-.235l-.03-.494a20.863 20.863 0 0 1-.01-.259l-.012-.541v-.564l.012-.541l.01-.26l.03-.493l.02-.235l.045-.443c.169-1.42.5-2.246.881-2.246Z"/></g>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div style="text-align: center;" class="pains-header center-basic"><b>Бесплатный</b> час консультации по промокоду <span class="lvlC1 body-font">englishful</span></div>
+                                        
+                                    </p>
+                                </div>
+
+                                <hr class="hr-faint-divider">
+
+
+                            {% comment %} Odin Doma {% endcomment %}
+                                <div class="review-dark">
+                                    <div class="review-profile">
+                                        <img style="height: 100px; width: 100px;" src="{% static 'website/images/partners/odin-doma.jpg' %}" alt="invaderLogo">
+                                        <div class="review-header">
+                                            <h3 class="review-name"> <a target=”_blank” href="https://vk.com/odindomatv">Медиастудия Один Дома</a></h3>
+                                            <div class="review-description"> Профессиональная журналистика для ребят от 10 до 16 лет</div>
+                                        </div>
+                                    </div>
+
+                                    <p class="review-body">         
+                                        <div>⭐ 20 лет опыта</div>
+                                        <div class="included smaller">– Огромный опыт преподавания и съемок. Программа "одиндомаТВ" регулярно выходит в эфир на таких телеканалах как "Домашний", "ТНТ4" и "Че"</div><hr class="hr-faint">
+                                        <div>⭐ 350+ выпускников </div>
+                                        <div class="included smaller">– Выпускники медиастудии выбирают журналистику и кино своей профессией. Они учатся на профильных специальностях в ВГИК, РГУ, ГИТР, СПБГУ, Мининском Университете, Университете Лобачевского, City (University of London) и других</div> <hr class="hr-faint">
+                                        <div>⭐ 300+ призов</div>
+                                        <div class="included smaller">– Среди наград медиастудии ТЭФИ 2018, ТЭФИ 2019 и более 300 наград на Всероссийских и Международных фестивалях.</div> <hr class="hr-faint">
+                                        
+                                        <div style="padding-bottom: 15px;" class="partner-links underline">
+                                            <a target=”_blank” class="social" href="https://vk.com/odindomatv">
+                                                <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M15.073 2H8.937C3.333 2 2 3.333 2 8.927v6.136C2 20.666 3.323 22 8.927 22h6.136C20.666 22 22 20.677 22 15.073V8.937C22 3.333 20.677 2 15.073 2Zm3.073 14.27h-1.459c-.552 0-.718-.447-1.708-1.437c-.864-.833-1.229-.937-1.448-.937c-.302 0-.385.083-.385.5v1.312c0 .355-.115.563-1.042.563a5.692 5.692 0 0 1-4.448-2.667a11.626 11.626 0 0 1-2.302-4.833c0-.219.083-.417.5-.417h1.458c.375 0 .51.167.657.552c.708 2.084 1.916 3.896 2.406 3.896c.188 0 .27-.083.27-.552v-2.146c-.062-.979-.582-1.062-.582-1.416a.36.36 0 0 1 .374-.334h2.292c.313 0 .417.156.417.531v2.896c0 .313.135.417.229.417c.188 0 .333-.104.677-.448a11.999 11.999 0 0 0 1.792-2.98a.628.628 0 0 1 .635-.416h1.459c.437 0 .53.219.437.531a18.205 18.205 0 0 1-1.958 3.365c-.157.24-.22.365 0 .646c.145.219.656.646 1 1.052a6.486 6.486 0 0 1 1.229 1.708c.125.406-.084.615-.5.615Z"/>
+                                                </svg>
+                                            </a>
+
+                                            <a target=”_blank” class="social" href="http://xn--80aeeatzffe6b.xn--p1ai/">
+                                                <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M16.36 14c.08-.66.14-1.32.14-2c0-.68-.06-1.34-.14-2h3.38c.16.64.26 1.31.26 2s-.1 1.36-.26 2m-5.15 5.56c.6-1.11 1.06-2.31 1.38-3.56h2.95a8.03 8.03 0 0 1-4.33 3.56M14.34 14H9.66c-.1-.66-.16-1.32-.16-2c0-.68.06-1.35.16-2h4.68c.09.65.16 1.32.16 2c0 .68-.07 1.34-.16 2M12 19.96c-.83-1.2-1.5-2.53-1.91-3.96h3.82c-.41 1.43-1.08 2.76-1.91 3.96M8 8H5.08A7.923 7.923 0 0 1 9.4 4.44C8.8 5.55 8.35 6.75 8 8m-2.92 8H8c.35 1.25.8 2.45 1.4 3.56A8.008 8.008 0 0 1 5.08 16m-.82-2C4.1 13.36 4 12.69 4 12s.1-1.36.26-2h3.38c-.08.66-.14 1.32-.14 2c0 .68.06 1.34.14 2M12 4.03c.83 1.2 1.5 2.54 1.91 3.97h-3.82c.41-1.43 1.08-2.77 1.91-3.97M18.92 8h-2.95a15.65 15.65 0 0 0-1.38-3.56c1.84.63 3.37 1.9 4.33 3.56M12 2C6.47 2 2 6.5 2 12a10 10 0 0 0 10 10a10 10 0 0 0 10-10A10 10 0 0 0 12 2Z"/>
+                                                </svg>
+                                            </a>
+
+                                            <a target=”_blank” class="social" href="https://www.youtube.com/@oddomatv">
+                                                <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M12.244 4c.534.003 1.87.016 3.29.073l.504.022c1.429.067 2.857.183 3.566.38c.945.266 1.687 1.04 1.938 2.022c.4 1.56.45 4.602.456 5.339l.001.152v.174c-.007.737-.057 3.78-.457 5.339c-.254.985-.997 1.76-1.938 2.022c-.709.197-2.137.313-3.566.38l-.504.023c-1.42.056-2.756.07-3.29.072l-.235.001h-.255c-1.13-.007-5.856-.058-7.36-.476c-.944-.266-1.687-1.04-1.938-2.022c-.4-1.56-.45-4.602-.456-5.339v-.326c.006-.737.056-3.78.456-5.339c.254-.985.997-1.76 1.939-2.021c1.503-.419 6.23-.47 7.36-.476h.489ZM9.999 8.5v7l6-3.5l-6-3.5Z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div style="text-align: center;" class="pains-header center-basic">По промокоду <span class="lvlC1 body-font">englishful</span>первый месяц обучения в школе – <b>бесплатно</b></div>
+                                        
+                                    </p>
+                                </div>
+
+                                <hr class="hr-faint-divider">
+
+                            {% comment %} Invader {% endcomment %}
+                                <div class="review-dark">
+                                    <div class="review-profile">
+                                        <img style="height: 100px; width: 100px;" src="{% static 'website/images/partners/invader.jpg' %}" alt="invaderLogo">
+                                        <div class="review-header">
+                                            <h3 class="review-name"> <a target=”_blank” href="https://vk.com/sneaker_inv">Sneaker Invader</a></h3>
+                                            <div class="review-description">Интернет-магазин оригинальной одежды и обуви</div>
+                                        </div>
+                                    </div>
+
+                                    <p class="review-body">         
+                                        <div>⭐ Только оригинальные товары</div> <hr class="hr-faint">
+                                        <div>⭐ Более 1100 отзывов в <a target=”_blank” href="https://vk.com/sneaker_inv">VK</a> с 2016 года</div> <hr class="hr-faint">
+                                        <div>⭐ Доставка в любую точку мира, возможен самовывоз из Москвы</div> <hr class="hr-faint">
+                                        
+                                        <div style="padding-bottom: 15px;" class="partner-links underline">
+                                            <a target=”_blank” class="social" href="https://vk.com/sneaker_inv">
+                                                <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M15.073 2H8.937C3.333 2 2 3.333 2 8.927v6.136C2 20.666 3.323 22 8.927 22h6.136C20.666 22 22 20.677 22 15.073V8.937C22 3.333 20.677 2 15.073 2Zm3.073 14.27h-1.459c-.552 0-.718-.447-1.708-1.437c-.864-.833-1.229-.937-1.448-.937c-.302 0-.385.083-.385.5v1.312c0 .355-.115.563-1.042.563a5.692 5.692 0 0 1-4.448-2.667a11.626 11.626 0 0 1-2.302-4.833c0-.219.083-.417.5-.417h1.458c.375 0 .51.167.657.552c.708 2.084 1.916 3.896 2.406 3.896c.188 0 .27-.083.27-.552v-2.146c-.062-.979-.582-1.062-.582-1.416a.36.36 0 0 1 .374-.334h2.292c.313 0 .417.156.417.531v2.896c0 .313.135.417.229.417c.188 0 .333-.104.677-.448a11.999 11.999 0 0 0 1.792-2.98a.628.628 0 0 1 .635-.416h1.459c.437 0 .53.219.437.531a18.205 18.205 0 0 1-1.958 3.365c-.157.24-.22.365 0 .646c.145.219.656.646 1 1.052a6.486 6.486 0 0 1 1.229 1.708c.125.406-.084.615-.5.615Z"/>
+                                                </svg>
+                                            </a>
+                                            
+                                            <a target=”_blank” class="social" href="https://t.me/sneaker_invader">
+                                                <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19c-.14.75-.42 1-.68 1.03c-.58.05-1.02-.38-1.58-.75c-.88-.58-1.38-.94-2.23-1.5c-.99-.65-.35-1.01.22-1.59c.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02c-.09.02-1.49.95-4.22 2.79c-.4.27-.76.41-1.08.4c-.36-.01-1.04-.2-1.55-.37c-.63-.2-1.12-.31-1.08-.66c.02-.18.27-.36.74-.55c2.92-1.27 4.86-2.11 5.83-2.51c2.78-1.16 3.35-1.36 3.73-1.36c.08 0 .27.02.39.12c.1.08.13.19.14.27c-.01.06.01.24 0 .38z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div style="text-align: center;" class="pains-header center-basic">
+                                            Скидка <b>₽1000</b> на первый заказ по промокоду <span class="lvlC1 body-font">englishful</span>
+                                            <div><span class="date_time">Скидка распространяется только на обувь</span></div>
+                                        </div>
+                                        
+                                    </p>
+                                </div>
+
+                                <hr class="hr-faint-divider">
+
+                            {% comment %} Customs {% endcomment %}
+                                <div class="review-dark">
+                                    <div class="review-profile">
+                                        <img style="height: 100px; width: 100px;" src="{% static 'website/images/partners/customs.jpg' %}" alt="invaderLogo">
+                                        <div class="review-header">
+                                            <h3 class="review-name"> <a target=”_blank” href="https://vk.com/naskvozcus">NASKVOZ' CUSTOMS</a></h3>
+                                            <div class="review-description"> Футболки, худи, лонгсливы и свитшоты с вышивкой по вашему индивидуальному дизайну</div>
+                                        </div>
+                                    </div>
+
+                                    <p class="review-body">         
+                                        <div>⭐ Кастомизация вещей с помощью машинной вышивки</div> <hr class="hr-faint">
+                                        <div>⭐ Разработка индивидуального дизайна по вашему заказу</div> <hr class="hr-faint">
+                                        <div>⭐ Возможность выбора дизайна вышивки из коллекции готовых дизайнов</div> <hr class="hr-faint">
+                                        <div>⭐ Доставка по всей России, возможен самовывоз из Нижнего Новгорода</div> <hr class="hr-faint">
+
+                                        <div style="padding-bottom: 15px;" class="partner-links underline">
+                                            <a target=”_blank” class="social" href="https://vk.com/naskvozcus">
+                                                <svg class="larger-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M15.073 2H8.937C3.333 2 2 3.333 2 8.927v6.136C2 20.666 3.323 22 8.927 22h6.136C20.666 22 22 20.677 22 15.073V8.937C22 3.333 20.677 2 15.073 2Zm3.073 14.27h-1.459c-.552 0-.718-.447-1.708-1.437c-.864-.833-1.229-.937-1.448-.937c-.302 0-.385.083-.385.5v1.312c0 .355-.115.563-1.042.563a5.692 5.692 0 0 1-4.448-2.667a11.626 11.626 0 0 1-2.302-4.833c0-.219.083-.417.5-.417h1.458c.375 0 .51.167.657.552c.708 2.084 1.916 3.896 2.406 3.896c.188 0 .27-.083.27-.552v-2.146c-.062-.979-.582-1.062-.582-1.416a.36.36 0 0 1 .374-.334h2.292c.313 0 .417.156.417.531v2.896c0 .313.135.417.229.417c.188 0 .333-.104.677-.448a11.999 11.999 0 0 0 1.792-2.98a.628.628 0 0 1 .635-.416h1.459c.437 0 .53.219.437.531a18.205 18.205 0 0 1-1.958 3.365c-.157.24-.22.365 0 .646c.145.219.656.646 1 1.052a6.486 6.486 0 0 1 1.229 1.708c.125.406-.084.615-.5.615Z"/>
+                                                </svg>
+                                            </a>
+                                        </div>
+                                        <div style="text-align: center;" class="pains-header center-basic">Скидка <b>10%</b> на первый заказ по промокоду <span class="lvlC1 body-font">englishful</span></div>
+                                        
+                                    </p>
+                                </div>
+                        </section>
+                    </div>
+
+                
+                {% comment %} About us {% endcomment %}
+                    <div class="about-elevation">
+                        <h2 id="englishful-is" class="center"><span style="margin-right: 7px;" class="gradient-fill">Englishful</span>это:</h2>
+
+                        <div class="wrapper">
+                            <div class="box">
+                                <img class="profile-logo" src="{% static 'website/images/about/idea.svg' %}" alt="ielts">
+                                <div class="pre-main"><b>Нестандартный подход при объяснении материала</b> </div>
+                                <div class="smaller"><hr class="media-disappear">Забудьте про стандартные непонятные объяснения! Мы понимаем о чем говорим, поэтому  <b>можем объяснить все простыми и понятными словами!</b>  <hr></div>
+                            </div>
+
+                            <div class="box">
+                                <img class="profile-logo" src="{% static 'website/images/about/graduation.svg' %}" alt="graduation-cap">
+                                <div class="pre-main"><b>Преподаватели – выпускники лучших лингвистических ВУЗов России</b></div> 
+                                <div class="smaller"><hr class="media-disappear">Преподаватели с высшим лингвистическим образованием и минимальным уровенем языка <b class="gradient-fill-c1">С1 Advanced</b><hr></div>
+                            </div>
+
+                            <div class="box">
+                                <img class="profile-logo" src="{% static 'website/images/about/experience.svg' %}" alt="work-experience">
+                                <div class="pre-main"><b>Опытные преподаватели с многолетним стажем</b></div>
+                                <div class="smaller"><hr class="media-disappear">Индивидуальный подход, регулярная обратная связь и <b>ощутимый прогресс с первых занятий</b><hr></div> 
+                            </div>
+                            
+                            <div class="box">
+                                <img class="profile-logo" src="{% static 'website/images/about/atmosphere.svg' %}" alt="relaxex-atmosphere">
+                                <div class="pre-main"><b>Непринуждённая обстановка на зянятиях</b></div> 
+                                <div class="smaller"><hr class="media-disappear">Всегда стараемся подружиться с учениками, чтобы мы были на одной волне, и занятия проходили в непринуждённой обстановке, так как это очень важно для достижения результата<hr></div> 
+                            </div>
+                        </div>
+                    </div>     
+        
+            
+        
+        <style>
+            footer {
+                display: block;
+            }
+            .container {
+                padding-top: 3rem;
+            }
+            @media all and (max-width: 480px) {
+                .container {
+                    padding-top: 0px;
+                }
+            }
+        </style>
+    {% endblock %}
+
+</div>
+<footer>
+   
+    <div class="englishful-inc">
+        <div class="center-basic">
+            <div class="smaller center-basic logo-center">© 2023 englishful<img class="logo-footer" src="{% static 'website/images/about/logo-menu.png' %}" alt="logo-footer"></div>
+                <a target=”_blank” class="date_time" href="https://drive.google.com/file/d/10J0Kk_SoWopmTNN19RJ__Ki6aoeEsYR8/view?usp=share_link">Политика в отношении обработки персональных данных</a>
+        </div>
+        <hr class="hr-faint">
+        <div class="footer-social center-basic">
+            {% comment %} TG {% endcomment %}
+            <a target=”_blank” href="https://t.me/englishful_school">
+                <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10s10-4.48 10-10S17.52 2 12 2zm4.64 6.8c-.15 1.58-.8 5.42-1.13 7.19c-.14.75-.42 1-.68 1.03c-.58.05-1.02-.38-1.58-.75c-.88-.58-1.38-.94-2.23-1.5c-.99-.65-.35-1.01.22-1.59c.15-.15 2.71-2.48 2.76-2.69a.2.2 0 0 0-.05-.18c-.06-.05-.14-.03-.21-.02c-.09.02-1.49.95-4.22 2.79c-.4.27-.76.41-1.08.4c-.36-.01-1.04-.2-1.55-.37c-.63-.2-1.12-.31-1.08-.66c.02-.18.27-.36.74-.55c2.92-1.27 4.86-2.11 5.83-2.51c2.78-1.16 3.35-1.36 3.73-1.36c.08 0 .27.02.39.12c.1.08.13.19.14.27c-.01.06.01.24 0 .38z"/>
+                </svg>
+            </a>
+            {% comment %} YouTube {% endcomment %}
+            <a target=”_blank” href="https://www.youtube.com/channel/UCZV3ZMO4ORY0Zo-mdj7mTAg">
+                <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M12.244 4c.534.003 1.87.016 3.29.073l.504.022c1.429.067 2.857.183 3.566.38c.945.266 1.687 1.04 1.938 2.022c.4 1.56.45 4.602.456 5.339l.001.152v.174c-.007.737-.057 3.78-.457 5.339c-.254.985-.997 1.76-1.938 2.022c-.709.197-2.137.313-3.566.38l-.504.023c-1.42.056-2.756.07-3.29.072l-.235.001h-.255c-1.13-.007-5.856-.058-7.36-.476c-.944-.266-1.687-1.04-1.938-2.022c-.4-1.56-.45-4.602-.456-5.339v-.326c.006-.737.056-3.78.456-5.339c.254-.985.997-1.76 1.939-2.021c1.503-.419 6.23-.47 7.36-.476h.489ZM9.999 8.5v7l6-3.5l-6-3.5Z"/>
+                </svg>
+            </a>
+            {% comment %} VK {% endcomment %}
+            <a target=”_blank” href="https://vk.com/englishful">
+                <svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.073 2H8.937C3.333 2 2 3.333 2 8.927v6.136C2 20.666 3.323 22 8.927 22h6.136C20.666 22 22 20.677 22 15.073V8.937C22 3.333 20.677 2 15.073 2Zm3.073 14.27h-1.459c-.552 0-.718-.447-1.708-1.437c-.864-.833-1.229-.937-1.448-.937c-.302 0-.385.083-.385.5v1.312c0 .355-.115.563-1.042.563a5.692 5.692 0 0 1-4.448-2.667a11.626 11.626 0 0 1-2.302-4.833c0-.219.083-.417.5-.417h1.458c.375 0 .51.167.657.552c.708 2.084 1.916 3.896 2.406 3.896c.188 0 .27-.083.27-.552v-2.146c-.062-.979-.582-1.062-.582-1.416a.36.36 0 0 1 .374-.334h2.292c.313 0 .417.156.417.531v2.896c0 .313.135.417.229.417c.188 0 .333-.104.677-.448a11.999 11.999 0 0 0 1.792-2.98a.628.628 0 0 1 .635-.416h1.459c.437 0 .53.219.437.531a18.205 18.205 0 0 1-1.958 3.365c-.157.24-.22.365 0 .646c.145.219.656.646 1 1.052a6.486 6.486 0 0 1 1.229 1.708c.125.406-.084.615-.5.615Z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</footer>
+<script type="module" src="{% static 'website/js/main.js' %}"></script>
+<script>
+    // Play Audio
+    const pauseSVG = '<svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10s10-4.477 10-10S17.523 2 12 2Zm-1.5 6.25v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 1.5 0Zm4.5 0v7.5a.75.75 0 0 1-1.5 0v-7.5a.75.75 0 0 1 1.5 0Z"/></svg>'
+    const playSVG = '<svg class="medium-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="currentColor" d="M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12Zm8.856-3.845A1.25 1.25 0 0 0 9 9.248v5.504a1.25 1.25 0 0 0 1.856 1.093l5.757-3.189a.75.75 0 0 0 0-1.312l-5.757-3.189Z"/></svg>'
+
+    const audioElements = document.querySelectorAll("[data-audio-element]");
+    audioElements.forEach((audioElement) => {
+        audioElement.addEventListener("loadedmetadata", () => {
+            const playButton = audioElement.previousElementSibling;
+            const audioInfo = audioElement.nextElementSibling;
+            const totalDuration = formatDuration(audioElement.duration);
+            audioInfo.textContent = `00:00 / ${totalDuration}`;
+            playButton.innerHTML = playSVG;
+
+            playButton.addEventListener("click", () => {
+                if (audioElement.paused) {
+                    audioElement.play();
+                    playButton.innerHTML = pauseSVG;
+                } else {
+                    audioElement.pause();
+                    playButton.innerHTML = playSVG;
+                }
+            });
+        
+            audioElement.addEventListener("timeupdate", () => updateAudioInfo(audioElement, audioInfo, totalDuration));
+            audioElement.addEventListener("ended", () => reset(audioElement, playSVG, playButton));
+        });
+    });
+
+    function formatDuration(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const remainingSeconds = Math.floor(seconds % 60);
+        const formattedMinutes = String(minutes).padStart(2, '0');
+        const formattedSeconds = String(remainingSeconds).padStart(2, '0');
+        return `${formattedMinutes}:${formattedSeconds}`;
+    }
+
+    function updateAudioInfo(audioElement, audioInfo, totalDuration) {
+        audioInfo.textContent = `${formatDuration(audioElement.currentTime)} / ${totalDuration}`;
+    }
+
+    function reset(audioElement, playSVG, playButton) {
+        audioElement.pause();
+        audioElement.currentTime = 0;
+        playButton.innerHTML = playSVG
+    }
+</script>
+</body>
+
+
+</html>

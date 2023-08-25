@@ -1,0 +1,188 @@
+{% extends "website/layout.html" %} {% block title %}Результат ЕГЭ{% endblock %} {% load static %} {% block body %}
+<table class="center-basic">
+  <tbody>
+    {% comment %} Listening {% endcomment %}
+    <tr>
+      <th style="border-bottom: 2px solid #555" colspan="5">
+        <div>Тестовый балл: {{result.converted_score}} / 100</div>
+        <div class="date_time_flex">Первичные баллы: {{result.raw}} / 86</div>
+        <ul class="smaller text-left">
+          <li><b class="correct-answer">Зеленым</b> выделены правильные ответы</li>
+          <li><b class="wrong-answer">Красным</b> выделены неправильные ответы</li>
+          <li><b class="sat_grade">Желтым</b> выделены правильные ответы, если вы ответили на это задание неправильно</li>
+        </ul>
+      </th>
+    </tr>
+    <tr>
+      <th colspan="5">Listening: {{result.listening}} / 14</th>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№1</span> <span class="date_time_flex">{{result.score_1}} / 3</span></td>
+      <td>
+        {% for item in result.st_answers.1 %} {% if item.0 == item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %},{% endif %} {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№2</span> <span class="date_time_flex">{{result.score_2}} / 4</span></td>
+      <td>
+        {% for item in result.st_answers.2 %} {% if item.0 == item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %}, {% endif %} {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№3-9</span> <span class="date_time_flex">{{result.score_3_9}} / 7</span></td>
+      <td>
+        {% for item in result.st_answers.3 %} {% if item.0 in item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %}, {% endif %} {% endfor %}
+      </td>
+    </tr>
+    {% comment %} Reading {% endcomment %}
+    <tr>
+      <th colspan="5">Reading: {{result.reading}} / 14</th>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№10</span> <span class="date_time_flex">{{result.score_10}} / 4</span></td>
+      <td>
+        {% for item in result.st_answers.10 %} {% if item.0 in item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %}, {% endif %} {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№11</span> <span class="date_time_flex">{{result.score_11}} / 3</span></td>
+      <td>
+        {% for item in result.st_answers.11 %} {% if item.0 in item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %}, {% endif %} {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№12-18</span> <span class="date_time_flex">{{result.score_12_18}} / 7</span></td>
+      <td>
+        {% for item in result.st_answers.12 %} {% if item.0 in item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %}, {% endif %} {% endfor %}
+      </td>
+    </tr>
+    {% comment %} Grammar {% endcomment %}
+    <tr>
+      <th colspan="5">Grammar: {{result.grammar}} / 18</th>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№19-24</span> <span class="date_time_flex">{{result.score_19_24}} / 6</span></td>
+      <td>
+        {% for item in result.st_answers.19 %} {% if item.0 in item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %}, {% endif %} {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№25-29</span> <span class="date_time_flex">{{result.score_25_29}} / 5</span></td>
+      <td>
+        {% for item in result.st_answers.25 %} {% if item.0 in item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %}, {% endif %} {% endfor %}
+      </td>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№30-36</span> <span class="date_time_flex">{{result.score_30_36}} / 7</span></td>
+      <td>
+        {% for item in result.st_answers.30 %} {% if item.0 in item.1 %}
+        <span class="correct-answer">{{ item.0 }}</span>
+        {% else %}
+        <span class="wrong-answer">({{ item.0 }})</span> <span class="sat_grade">{{ item.1 }}</span>
+        {% endif %} {% if not forloop.last %}, {% endif %} {% endfor %}
+      </td>
+    </tr>
+    {% comment %} Writing {% endcomment %}
+    <tr>
+      <th colspan="5">Writing: {% if result.checked == False %}-{% else %}{{result.writing}}{% endif %} / 20</th>
+    </tr>
+    <tr>
+      <td>
+        <span class="lvlC1">№37</span> <span class="smaller">(письмо)</span> <span class="date_time_flex">{% if result.checked == False %}-{% else %}{{result.letter_score}}{% endif %} / 6</span>
+      </td>
+      <td>
+        {% if result.checked == False %}<span class="date_time_flex bad_grade">на проверке</span> {% else %}
+        <span class="date_time_flex correct-answer">проверено<span class="emoji-margin">✅</span></span> {% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td><span class="lvlC1">№38</span> <span class="smaller">(эссе)</span> <span class="date_time_flex">{% if result.checked == False %}-{% else %}{{result.essay_score}}{% endif %} / 14</span></td>
+      <td>
+        {% if result.checked == False %}<span class="date_time_flex bad_grade">на проверке</span> {% else %}
+        <span class="date_time_flex correct-answer">проверено<span class="emoji-margin">✅</span></span> {% endif %}
+      </td>
+    </tr>
+    {% comment %} Speaking {% endcomment %}
+    <tr>
+      <th colspan="5">Speaking: {% if result.checked == False %}-{% else %}{{result.speaking}}{% endif %} / 20</th>
+    </tr>
+    <tr>
+      <td>
+        <span class="lvlC1">№39</span> <span class="smaller">(чтение текста)</span> <span class="date_time_flex">{% if not result.checked %}-{% else %}{{result.speaking_read}}{% endif %} / 1</span>
+      </td>
+      <td>
+        {% if not result.speaking_audio %} <a href="{% url 'save_audio' ege_testname=result.test_proper.ege_testname %}">❗Сдать устную часть❗</a> {% elif result.speaking_audio and not result.checked
+        %}<span class="date_time_flex bad_grade">на проверке</span>{% elif result.speaking_audio and result.checked %}<span class="date_time_flex correct-answer"
+          >проверено<span class="emoji-margin">✅</span></span
+        >{% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="lvlC1">№40</span> <span class="smaller">(вопросы)</span> <span class="date_time_flex">{% if not result.checked %}-{% else %}{{result.speaking_questions}}{% endif %} / 4</span>
+      </td>
+      <td>
+        {% if not result.speaking_audio %} <a href="{% url 'save_audio' ege_testname=result.test_proper.ege_testname %}">❗Сдать устную часть❗</a> {% elif result.speaking_audio and not result.checked
+        %}<span class="date_time_flex bad_grade">на проверке</span>{% elif result.speaking_audio and result.checked %}<span class="date_time_flex correct-answer"
+          >проверено<span class="emoji-margin">✅</span></span
+        >{% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="lvlC1">№41</span> <span class="smaller">(интервью)</span> <span class="date_time_flex">{% if not result.checked %}-{% else %}{{result.speaking_interview}}{% endif %} / 5</span>
+      </td>
+      <td>
+        {% if not result.speaking_audio %} <a href="{% url 'save_audio' ege_testname=result.test_proper.ege_testname %}">❗Сдать устную часть❗</a> {% elif result.speaking_audio and not result.checked
+        %}<span class="date_time_flex bad_grade">на проверке</span>{% elif result.speaking_audio and result.checked %}<span class="date_time_flex correct-answer"
+          >проверено<span class="emoji-margin">✅</span></span
+        >{% endif %}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <span class="lvlC1">№42</span> <span class="smaller">(монолог)</span> <span class="date_time_flex">{% if not result.checked %}-{% else %}{{result.speaking_monologue}}{% endif %} / 10</span>
+      </td>
+      <td>
+        {% if not result.speaking_audio %} <a href="{% url 'save_audio' ege_testname=result.test_proper.ege_testname %}">❗Сдать устную часть❗</a> {% elif result.speaking_audio and not result.checked
+        %}<span class="date_time_flex bad_grade">на проверке</span>{% elif result.speaking_audio and result.checked %}<span class="date_time_flex correct-answer"
+          >проверено<span class="emoji-margin">✅</span></span
+        >{% endif %}
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+{% endblock %}

@@ -1,0 +1,47 @@
+{% extends "website/layout.html" %} {% block title %}Регистрация{% endblock %} {% load static %} {% block body %}
+
+<h2>Register</h2>
+
+{% if message %}
+<div>{{ message }}</div>
+{% endif %}
+
+<form action="{% url 'register' %}" method="post">
+  {% csrf_token %}
+
+  <div>
+    <input autocomplete="off" autofocus type="text" name="username" placeholder="Username" required />
+  </div>
+
+  <div>
+    <input autocomplete="off" autofocus type="text" name="first_name" placeholder="Name" />
+  </div>
+
+  <div>
+    <input autocomplete="off" autofocus type="text" name="last_name" placeholder="Surname" />
+  </div>
+
+  <div>
+    <input autocomplete="off" type="text" name="cefr" placeholder="CEFR" />
+  </div>
+
+  <div>
+    <input autocomplete="off" type="text" name="progress" placeholder="Progress" />
+  </div>
+
+  <div>
+    <input autocomplete="off" type="email" name="email" placeholder="Email Address" />
+  </div>
+
+  <div>
+    <input autocomplete="off" type="password" name="password" placeholder="Password" required />
+  </div>
+
+  <div>
+    <input type="password" name="confirmation" placeholder="Confirm Password" required />
+  </div>
+
+  <input class="button margin-top" type="submit" value="Register" />
+</form>
+
+{% endblock %}

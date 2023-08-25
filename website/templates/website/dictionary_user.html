@@ -1,0 +1,230 @@
+{% extends "website/layout.html" %}
+{% block title %}Словарь{% endblock %}
+{% load static %}
+
+{% block body %}
+{% comment %} Add to user-specific dict {% endcomment %}
+<div id="training-cards" class="hidden">
+    
+    <div class="center-basic">
+
+      <div class="margin-bottom center">
+          <button class="button" id="stop-training">Stop Training</button>
+      </div>
+
+      <div class="center-basic">
+        <div style="display:block;" class="date_time center-basic normal-line">Скорость диктора</div>
+        <input class="normal-line" style="padding: 0px; margin-top: 0px;" type="range" id="cards-rate" name="rate" min="0" max="1.5" step="any" value="0.9">
+      </div>
+
+      <div style="text-align: center;" class="card-counter center-basic margin-bottom">
+        <span id="card-counter"></span>
+        <div>
+          <b id="correct-counter" class="correct-answer">0</b> / <b class="wrong-color" id="wrong-counter">0</b>
+        </div>
+      </div>
+
+      {% for entry in entries %}
+          {% if entry.word.topics.all %}
+              
+            <div data-card-id="{{entry.id}}" class="card hidden">
+              <div class="front">
+                  <h3 class="h3-cards">{{ entry.word.russian_word }}</h3>
+                  <button data-check-id="{{entry.id}}" style="height: 46px;" class="button card-button">Check</button>
+              </div>
+
+              <div class="back">
+                    <div class="relative" name="cards-word">
+                      <h3 class="h3-cards">{{ entry.word.english_word }}</h3>
+                      <a data-say-word>
+                        <svg id="speech-cards" xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"><path fill="currentColor" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95c-7.34 11.17-4.22 26.18 6.95 33.51c66.27 43.49 105.82 116.6 105.82 195.58c0 78.98-39.55 152.09-105.82 195.58c-11.17 7.32-14.29 22.34-6.95 33.5c7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24c-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36c6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45c-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81c-11.61 6.41-15.84 21-9.45 32.61c6.43 11.66 21.05 15.8 32.61 9.45c28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"/></svg>
+                      </a>
+                    </div>
+                    <div style="line-height: normal;">{% for topic in entry.word.topics.all %}<span class="topic-training">{{ topic }}</span>{% endfor %}</div>
+                    <hr class="hr-faint">
+                    <div class="relative" name="cards-context">
+                      <div class="div-cards margin-bottom smaller">{{ entry.word.context }}</div>
+                      <a data-say-word>
+                        <svg id="speech-cards" xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"><path fill="currentColor" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95c-7.34 11.17-4.22 26.18 6.95 33.51c66.27 43.49 105.82 116.6 105.82 195.58c0 78.98-39.55 152.09-105.82 195.58c-11.17 7.32-14.29 22.34-6.95 33.5c7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24c-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36c6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45c-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81c-11.61 6.41-15.84 21-9.45 32.61c6.43 11.66 21.05 15.8 32.61 9.45c28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"/></svg>
+                      </a>
+                    </div>
+                  <div>
+                    <div class="normal-line margin-bottom" id="progress-message">
+                      <progress data-progress-bar="{{entry.id}}" data-word-progress="{{entry.progress}}" class="normal-line" max="100" value="{{entry.progress}}"></progress>
+                      <div style="display: block;" class="date_time normal-line">Current progress: {{entry.progress}}%</div>
+                    </div>
+                    <button data-plus-id="{{entry.id}}" data-progress-type="+" class="button button-small-padding plus-progress" id="plus-progress-topic">✅</button>
+                    <button data-minus-id="{{entry.id}}" data-progress-type="-" class="button button-small-padding minus-progress" id="minus-progress-topic">❌</button>
+                    <button data-next-id="{{entry.id}}" style="height: 46px;" class="button card-button hidden">Next</button>
+                  </div>
+              </div>
+
+            </div>
+
+          {% else %}
+
+            <div data-card-id="{{entry.id}}" class="card hidden">
+              <div class="front">
+                  <h3 class="h3-cards">{{ entry.word.russian_word }}</h3>
+                  <button data-check-id="{{entry.id}}" style="height: 46px;" class="button card-button">Check</button>
+              </div>
+  
+              <div class="back">
+                  <div class="relative" name="cards-word">
+                    <h3 class="h3-cards">{{ entry.word.english_word }}</h3>
+                    <a data-say-word>
+                      <svg id="speech-cards" xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"><path fill="currentColor" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95c-7.34 11.17-4.22 26.18 6.95 33.51c66.27 43.49 105.82 116.6 105.82 195.58c0 78.98-39.55 152.09-105.82 195.58c-11.17 7.32-14.29 22.34-6.95 33.5c7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24c-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36c6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45c-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81c-11.61 6.41-15.84 21-9.45 32.61c6.43 11.66 21.05 15.8 32.61 9.45c28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"/></svg>
+                    </a>
+                  </div>
+                  <hr class="hr-faint">
+                  <div class="relative" name="cards-context">
+                    <div class="div-cards margin-bottom smaller">{{ entry.word.context }}</div>
+                    <a data-say-word>
+                      <svg id="speech-cards" xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"><path fill="currentColor" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95c-7.34 11.17-4.22 26.18 6.95 33.51c66.27 43.49 105.82 116.6 105.82 195.58c0 78.98-39.55 152.09-105.82 195.58c-11.17 7.32-14.29 22.34-6.95 33.5c7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24c-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36c6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45c-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81c-11.61 6.41-15.84 21-9.45 32.61c6.43 11.66 21.05 15.8 32.61 9.45c28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"/></svg>
+                    </a>
+                  </div>
+                  <div>
+                    <div class="normal-line margin-bottom" id="progress-message">
+                      <progress data-progress-bar="{{entry.id}}" data-word-progress="{{entry.progress}}" class="normal-line" max="100" value="{{entry.progress}}"></progress>
+                      <div style="display: block;" class="date_time normal-line">Current progress: {{entry.progress}}%</div>
+                    </div>
+                    <button data-plus-id="{{entry.id}}" data-progress-type="+" class="button button-small-padding plus-progress" id="plus-progress">✅</button>
+                    <button data-minus-id="{{entry.id}}" data-progress-type="-" class="button button-small-padding minus-progress" id="minus-progress">❌</button>
+                    <button data-next-id="{{entry.id}}" style="height: 46px;" class="button card-button hidden">Next</button>
+                  </div>
+              </div>
+            </div>
+
+          {% endif %}
+      {% endfor %}
+
+    </div>
+</div>
+
+<div id="dict-main">
+  <div id="dict-input">
+    <form method="post" action="{% url 'add_word' %}">
+      {% csrf_token %}
+      <textarea required class="editable" name="english"  placeholder="English Word" cols="24" rows="3"></textarea>
+      <textarea required class="editable" name="russian" placeholder="Russian Word" cols="24" rows="3"></textarea>
+      <textarea required class="editable" name="context" placeholder="Context" cols="24" rows="3"></textarea>
+      <div class="center-basic">
+        <button style="margin-top: 10px;" type="submit" class="button def-spacing">Add</button>
+      </div> 
+    </form>
+  </div>
+
+  <hr class="hr-faint">
+
+  {% comment %} Search {% endcomment %}
+  <div class="center">
+    <form id="search_form" method="GET" action="{% url 'dictionary_search' %}">
+      {% csrf_token %}
+      <div class="search-container">
+        <input data-search-input style="margin-top: 0px;" autocomplete="off" type="text" name="search_query" id="searchbar" placeholder="Поиск слов...">
+        <button type="submit" class="magnifier">🔍</button>
+      </div>
+    </form>
+  </div>
+
+  {% comment %} Topics {% endcomment %}
+    <div class="center filter-group fancy-shadow">
+      <form id="filter_form" method="GET" action={% url 'dictionary_filter' %}>
+        {% csrf_token %}
+        <div class="center-basic search-container">
+          {{form_topic_user.topics}}
+          <button class="magnifier" type="submit">🔍</button>
+        </div>
+
+        <div class="center-basic">
+          <div class="center-basic normal-line">
+            <span class="date_time underline">Прогресс слова</span>
+          </div>
+          <span class="date_time_flex">от </span><input style="width: 75px" type="number" id="progress-filter-from" name="progress-filter-from" placeholder="От" min="0" max="100" value="0" maxlength="3">
+          <span class="date_time_flex">до</span> <input style="width: 75px" type="number" id="progress-filter-to" name="progress-filter-to" placeholder="До" min="0" max="100" value="100" maxlength="3">
+        </div>
+
+        <div class="center-basic normal-line">
+          <span class="date_time underline">Дата добавления</span>
+        </div>
+
+        <div class="center-basic">
+          <span style="display: inline-block;"><span class="date_time_flex">от</span> <input placeholder="" type="date" id="date-filter-from" name="date-filter-from"></span>
+          <span style="display: inline-block;"><span class="date_time_flex">до</span> <input placeholder="" type="date" id="date-filter-to" name="date-filter-to"></span>
+        </div>
+      </form>
+
+      <div class="margin-top">
+        <button onclick="window.scrollTo({top: 0, behavior: 'smooth'});" class="button def-spacing" id="start-training">Training<span style="font-size: large;" class="emoji-margin">🎯</span></button>
+
+        <a href="{% url 'dictionary' %}">
+          <button class="button def-spacing">Clear<span style="font-size: large;" class="margnin-top emoji-margin">🔄</span></button>
+        </a>
+      </div>
+
+    </div>
+
+  <div class="center-basic">
+    <div class="date_time_flex center-basic normal-line">Скорость диктора</div>
+    <input style="padding: 0px; margin-top: 0px;" type="range" id="dict-rate" name="rate" min="0" max="1.5" step="any" value="0.9">
+  </div>
+
+  <div class="center-basic">
+    
+    <div class="folder folder-tablet smaller">Progress - <b class="underline">{{average_progress|floatformat}}%</b></div>
+
+    <div class="collapsible" style="margin-top: 15px;" class="fancy-info center-basic">
+      {% for topic, progress, num_words in topic_progress %}
+          <div class="smaller"><span class="{% if topic == "No topic" %}without-topic{% endif %} topic-training">{{topic}}</span> - <b class="{% if progress == 100 %}correct-answer{% elif progress > 50 %}sat_grade{% else %}bad_grade{% endif %}">{{progress|floatformat}}%</b> <span class="date_time">({{num_words}} {% if num_words == 1 %}word{% else %}words{% endif %} )</span> {% if progress == 100 %}✅{% endif %} </div> <hr style="margin-top: 5px;" class="hr-faint">
+      {% endfor %}
+    </div>
+  </div>
+
+  <div class="center-basic">
+        <table id="my-table">
+          <thead>
+            <th>№</th>
+            <th>English</th>
+            <th>Russian</th>
+            <th>Context</th>
+          </thead>
+          <tbody>
+          {% for entry in entries %}
+            <tr>
+              <td class="td-counter"><div><span class="counter-dict">{{ forloop.counter }}</span></div>
+                <div class="date_time">{{ entry.date|date:"F j" }}</div>
+                {% for topic in entry.word.topics.all %}
+                <span class="topic">{{topic}}</span>
+                {% endfor %}
+                <div id="progress-dict" class="date_time normal-line">Progress: {% if entry.progress == 100 %}<span class="correct-answer">{{entry.progress}}%</span>{% elif entry.progress > 50  %}<span class="sat_grade">{{entry.progress}}%</span>{% else %}<span class="bad_grade">{{entry.progress}}%</span>{% endif %} </div>
+                <div class="normal-line"><progress style="inline-size: 90px;" max="100" value="{{entry.progress}}"></progress></div>
+              </td>
+              <td class="td-words relative" name="english_word"><div class="margin-right-dict">{{ entry.word.english_word }}</div>
+              <a data-say-word>
+                <svg id="speech" xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"><path fill="currentColor" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95c-7.34 11.17-4.22 26.18 6.95 33.51c66.27 43.49 105.82 116.6 105.82 195.58c0 78.98-39.55 152.09-105.82 195.58c-11.17 7.32-14.29 22.34-6.95 33.5c7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24c-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36c6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45c-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81c-11.61 6.41-15.84 21-9.45 32.61c6.43 11.66 21.05 15.8 32.61 9.45c28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"/></svg>
+              </a></td>
+              <td class="td-words" name="russian_word">{{ entry.word.russian_word }}</td>
+              <td class="relative" name="context"><div class="margin-right-dict">{{ entry.word.context }}</div>
+              <a data-say-word>
+                <svg id="speech" xmlns="http://www.w3.org/2000/svg" width="33" height="33" viewBox="0 0 576 512"><path fill="currentColor" d="M215.03 71.05L126.06 160H24c-13.26 0-24 10.74-24 24v144c0 13.25 10.74 24 24 24h102.06l88.97 88.95c15.03 15.03 40.97 4.47 40.97-16.97V88.02c0-21.46-25.96-31.98-40.97-16.97zm233.32-51.08c-11.17-7.33-26.18-4.24-33.51 6.95c-7.34 11.17-4.22 26.18 6.95 33.51c66.27 43.49 105.82 116.6 105.82 195.58c0 78.98-39.55 152.09-105.82 195.58c-11.17 7.32-14.29 22.34-6.95 33.5c7.04 10.71 21.93 14.56 33.51 6.95C528.27 439.58 576 351.33 576 256S528.27 72.43 448.35 19.97zM480 256c0-63.53-32.06-121.94-85.77-156.24c-11.19-7.14-26.03-3.82-33.12 7.46s-3.78 26.21 7.41 33.36C408.27 165.97 432 209.11 432 256s-23.73 90.03-63.48 115.42c-11.19 7.14-14.5 22.07-7.41 33.36c6.51 10.36 21.12 15.14 33.12 7.46C447.94 377.94 480 319.54 480 256zm-141.77-76.87c-11.58-6.33-26.19-2.16-32.61 9.45c-6.39 11.61-2.16 26.2 9.45 32.61C327.98 228.28 336 241.63 336 256c0 14.38-8.02 27.72-20.92 34.81c-11.61 6.41-15.84 21-9.45 32.61c6.43 11.66 21.05 15.8 32.61 9.45c28.23-15.55 45.77-45 45.77-76.88s-17.54-61.32-45.78-76.86z"/></svg>
+              </a>
+            </td>
+            </tr>
+          {% endfor %}
+          </tbody>
+        </table>
+  </div>
+</div>
+
+<style>
+  .container {
+    padding-top: 4rem;
+  }
+
+  @media all and (max-width: 480px) {
+    .container {
+      padding-top: 1rem;
+    }
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,294 @@
+{% extends "website/layout.html" %} {% block title %}Устная часть ЕГЭ{% endblock %} {% load static %} {% block body %} {% comment %} Ege Success Message {% endcomment %}
+<div id="successDiv" class="hidden">
+  <div class="good_grade info margin-top margin-bottom fancy-shadow">Запись ответа успешно сохранена! ✅</div>
+  <div class="date_time_flex center-basic margin-bottom underline">Вкладку можно закрыть</div>
+</div>
+
+<div id="tester" class="info">
+  <h3>Проверка звука<span class="emoji-margin">🔉</span></h3>
+  <div style="text-align: left; font-size: 17px">
+    <ol>
+      <li>Для начала проверки звука нажмите "Начать запись"</li>
+      <li>Нужно разрешить доступ к микрофону <span class="date_time_flex">(иначе вас не будет слышно)</span></li>
+      <div class="flex-center">
+        <img style="width: 60%; height: 300px" class="image-example pc_example" src="{% static 'website/images/ege/help/allow_pc.png' %}" />
+        <img class="image-example mobile_example" src="{% static 'website/images/ege/help/allow_mobile.jpg' %}" />
+      </div>
+      <li>Попробуйте скачать что-нибудь</li>
+      <li>Нажмите "Стоп"</li>
+      <li>Воспроизведите появившееся аудио в плеере</li>
+      <li>Если вы себя слышите, то все работает – можно начинать устную часть</li>
+    </ol>
+
+    <div class="center-basic">
+      <button class="button" id="recordButton">Начать запись</button>
+      <button class="button" id="stopButton" disabled>Стоп</button>
+      <button id="saveButton" style="display: none" data-testname="{{ variant.ege_testname }}">Save</button>
+    </div>
+    <div class="center-basic margin-top">
+      <audio controls id="recordedAudio">
+        <source id="recordedAudioSource" type="audio/ogg" />
+        Your browser does not support the audio element.
+      </audio>
+    </div>
+
+    <hr />
+    👉 После того, как вы нажмете "начать экзамен" запись вашего ответа начнется автоматически. <br />👉 У каждого задания будет таймер на подготовку и на ответ 🕐 <br />👉 В правом верхнем углу
+    появится таймер, показывающий сколько осталось до конца устной части. <br />
+    ✅ По истечении этого таймера запись вашего ответа сохранится автоматически и вы увидите уведомление. <span class="date_time_flex">(как на изображении ниже)</span>
+    <div class="flex-center"><img class="ege-success default-shadow margin-top" src="{% static 'website/images/ege/help/success.png' %}" /></div>
+  </div>
+</div>
+
+<div style="font-size: smaller" id="timer"></div>
+
+<div class="center"><button class="button" id="start" onclick="hideButton()">Начать экзамен</button></div>
+
+<div id="container">
+  {% comment %} Text {% endcomment %}
+  <div class="box-speaking" id="text">
+    <div class="info fancy-shadow margin-bottom" id="timerText"></div>
+    <span class="lvlC1">№1</span> <b>Task 1.</b> Imagine that you are preparing a project with your friend. You have found some interesting material for the presentation and you want to read this text
+    to your friend. You have 1.5 minutes to read the text silently, then be ready to read it out aloud. You will not have more than 1.5 minutes to read it.<br /><br />
+    <div class="info text-left">{{variant.speaking_text|safe}}</div>
+  </div>
+
+  {% comment %} Ad {% endcomment %}
+  <div class="box-speaking" id="ad">
+    <div class="info fancy-shadow margin-bottom" id="timerAd"></div>
+    <span class="lvlC1">№2</span> <b>Task 2.</b> Study the advertisement.
+    <h3 class="center-basic">{{variant.ad_header}}</h3>
+    <img style="border: 2px solid white" id="speaking-image" src="{% static 'website/images/ege/' %}{{variant.ad_img}}" />
+    <div>{{variant.ad_task|safe}}</div>
+    <div class="info-left">
+      <ol>
+        {% for item in variant.ad_questions %}
+        <li>{{item}}</li>
+        {% endfor %}
+      </ol>
+    </div>
+    <div>You have 20 seconds to ask each question.</div>
+  </div>
+
+  {% comment %} Interview {% endcomment %}
+  <div class="box-speaking" id="interview">
+    <span class="lvlC1">№3</span> <b>Task 3.</b> You are going to give an interview. You have to answer five questions. Give full answers to the questions (2–3 sentences). Remember that you have 40
+    seconds to answer each question.
+
+    <div class="center">
+      <audio id="speaking-interview" src="{% static 'website/audio/ege/' %}{{variant.interview_path}}" controls onplay="this.controls=false" preload="auto" volume="1.0"></audio>
+    </div>
+  </div>
+
+  {% comment %} Monologue {% endcomment %}
+  <div class="box-speaking" id="monologue">
+    <div style="border-color: #555" class="center letter-border" id="timerMonologue"></div>
+    <span class="lvlC1">№4</span> <b>Task 4.</b> Imagine that you and your friend are doing a school project <b>"{{variant.monologue_topic}}"</b>. You have found some illustrations and want to share
+    the news. Leave a voice message to your friend. In 2.5 minutes be ready to:
+    <ul>
+      {% for point in variant.monologue_points %}
+      <li>{{point}}</li>
+      {% endfor %}
+    </ul>
+    <div>You will speak for not more than 3 minutes (12–15 sentences).</div>
+    <div>You have to talk continuously.</div>
+    <div class="image-container">
+      <div class="image-wrapper">
+        <div class="image-label">Photo №1</div>
+        <img style="border: 2px solid white" src="{% static 'website/images/ege/' %}{{variant.monologue_imgs.0}}" />
+      </div>
+      <div class="image-wrapper">
+        <div class="image-label">Photo №2</div>
+        <img style="border: 2px solid white" src="{% static 'website/images/ege/' %}{{variant.monologue_imgs.1}}" />
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  {% comment %} Hide {% endcomment %}
+    function hideButton() {
+      document.getElementById("start").style.display = "none";
+      document.getElementById("tester").style.display = "none";
+      document.getElementById("recordButton").disabled = false;
+      document.getElementById("recordButton").click();
+    }
+
+  {% comment %} Toggle {% endcomment %}
+    const textDiv = document.getElementById("text");
+    const adDiv = document.getElementById("ad");
+    const interviewDiv = document.getElementById("interview");
+    const monologueDiv = document.getElementById("monologue");
+    const timerDiv = document.getElementById("timer");
+    const startButton = document.getElementById("start");
+    const pauseButton = document.getElementById("pause");
+    const resumeButton = document.getElementById("resume");
+    const successDiv = document.getElementById("successDiv");
+
+    let milli = 30;
+    let timeLeft = 961;
+    let timerId;
+    let currentDiv = textDiv;
+
+    function startTimer() {
+      timerId = setInterval(() => {
+        let minutes = Math.floor(timeLeft / 60);
+        let seconds = timeLeft % 60;
+
+        timerDiv.innerHTML = `До конца устной части: ${minutes}м ${seconds}с`;
+        timeLeft--;
+        if (timeLeft === 0) {
+          clearInterval(timerId);
+          document.getElementById("stopButton").click();
+          document.getElementById("saveButton").disabled = false;
+          setTimeout(() => document.getElementById("saveButton").click(), 500);
+          successDiv.classList.toggle('hidden');
+
+        } else if (timeLeft === 960) {
+
+            currentDiv.style.display = "none";
+            currentDiv = textDiv;
+            textDiv.style.display = "block";
+
+            let PrepTime = 90;
+            let PrepTimer = setInterval(() => {
+              if (PrepTime > 0) {
+                let minutesPrepare = Math.floor(PrepTime / 60);
+                let secondsPrepare = PrepTime % 60;
+                document.getElementById("timerText").innerHTML = `Время на подготовку: ${minutesPrepare}м ${secondsPrepare}с`;
+                PrepTime--;
+              } else {
+                clearInterval(PrepTimer);
+                document.getElementById("timerText").innerHTML = "<b class='wrong-answer'>У вас есть 1,5 минуты, чтобы ответить</b>";
+              }
+            }, milli);
+
+
+        } else if (timeLeft === 780) {
+
+            currentDiv.style.display = "none";
+            currentDiv = adDiv;
+            adDiv.style.display = "block";
+
+            let PrepTime = 90;
+            let PrepTimer = setInterval(() => {
+              if (PrepTime > 0) {
+                let minutesPrepare = Math.floor(PrepTime / 60);
+                let secondsPrepare = PrepTime % 60;
+                document.getElementById("timerAd").innerHTML = `Время на подготовку: ${minutesPrepare}м ${secondsPrepare}с`;
+                PrepTime--;
+              } else {
+                clearInterval(PrepTimer);
+                document.getElementById("timerAd").innerHTML = "<b class='wrong-answer'>У вас есть 80 секунд, чтобы задать 4 вопроса</b>";
+              }
+            }, milli);
+
+
+        } else if (timeLeft === 610) {
+
+            currentDiv.style.display = "none";
+            currentDiv = interviewDiv;
+            interviewDiv.style.display = "block";
+            document.getElementById("speaking-interview").play();
+
+        } else if (timeLeft === 330) {
+
+            currentDiv.style.display = "none";
+            currentDiv = monologueDiv;
+            monologueDiv.style.display = "block";
+
+            let PrepTime = 150;
+            let PrepTimer = setInterval(() => {
+              if (PrepTime > 0) {
+                let minutesPrepare = Math.floor(PrepTime / 60);
+                let secondsPrepare = PrepTime % 60;
+                document.getElementById("timerMonologue").innerHTML = `Время на подготовку: ${minutesPrepare}м ${secondsPrepare}с`;
+                PrepTime--;
+              } else {
+                clearInterval(PrepTimer);
+                document.getElementById("timerMonologue").innerHTML = "<b class='wrong-answer'>У вас есть 3 минуты, чтобы ответить</b>";
+              }
+            }, milli);
+
+        }
+      }, milli);
+    }
+
+    startButton.addEventListener("click", startTimer);
+
+
+
+
+  {% comment %} Audio {% endcomment %}
+    var recordButton = document.getElementById("recordButton");
+    var stopButton = document.getElementById("stopButton");
+    var saveButton = document.getElementById("saveButton");
+
+    var mediaRecorder;
+    var chunks = [];
+
+
+    recordButton.addEventListener("click", function() {
+        // use the Web Audio API to start recording audio
+        chunks = [];
+        navigator.mediaDevices.getUserMedia({audio: true})
+            .then(function(stream) {
+                // create a new MediaRecorder object
+                mediaRecorder = new MediaRecorder(stream);
+
+                // enable the stop button
+                stopButton.disabled = false;
+
+                // start recording
+                mediaRecorder.start();
+
+                // when recording is complete, enable the save button
+                mediaRecorder.addEventListener("dataavailable", function(event) {
+                    chunks.push(event.data);
+                });
+
+                mediaRecorder.addEventListener("stop", function() {
+                    var blob = new Blob(chunks, {type: 'audio/ogg; codecs=opus'});
+                    var audioUrl = URL.createObjectURL(blob);
+
+                    saveButton.disabled = false;
+
+                    var source = document.getElementById("recordedAudioSource");
+                    source.setAttribute("src", audioUrl);
+
+                    var recordedAudio = document.getElementById("recordedAudio");
+                    recordedAudio.load();
+
+                    saveButton.addEventListener("click", function() {
+                      window.onbeforeunload = null;
+                      var formData = new FormData();
+                      formData.append("audio", blob, 'recording.ogg');
+                      var xhr = new XMLHttpRequest();
+                      xhr.open("POST", "/speaking/" + saveButton.getAttribute("data-testname"));
+                      xhr.onreadystatechange = function() {
+                          if (xhr.readyState === 4 && xhr.status === 200) {
+                            console.log(xhr.responseText);
+                          }
+                      };
+                      xhr.send(formData);
+                    });
+                });
+            });
+
+        // disable the record button and enable the stop button
+        recordButton.disabled = true;
+    });
+
+    stopButton.addEventListener("click", function() {
+        // stop recording
+        mediaRecorder.stop();
+
+        // disable the stop button and enable the save button
+        stopButton.disabled = true;
+    });
+
+  {% comment %} refresh / close prompt {% endcomment %}
+    window.onbeforeunload = function() {
+      return "Вы уверены, что хотите закрыть / обновить страницу? Весь прогресс будет потерян!";
+    };
+</script>
+{% endblock %}

@@ -1,0 +1,128 @@
+{% extends "website/layout.html" %} {% block title %}{{test.testname}}{% endblock %} {% load static %} {% block body %} {% if test.task %}
+<div class="info info-smaller">{{test.task|safe}}</div>
+{% endif %} {% if test.theory %}
+<div style="margin-top: 20px; margin-bottom: 20px" class="flex-center">
+  <a class="theory-glow" target="”_blank”" href="{{test.theory.url}}">{{test.theory.title}}<span class="emoji-margin">🔗</span></a>
+</div>
+{% endif %} {% if test.picture %}
+<div class="center">
+  <img class="tests-image" src="{% static 'website/images/tasks/' %}{{test.picture}}" />
+</div>
+{% endif %} {% if test.audio_path %}
+<div class="center-grid">
+  <audio src="{% static 'website/audio/tasks/' %}{{test.audio_path}}" controls preload="auto"></audio>
+</div>
+{% endif %} {% if test.text %}
+<hr class="hr-faint" />
+<div class="td-basic">{{test.text|safe}}</div>
+<hr class="hr-faint" />
+{% endif %}
+
+<form data-test-form autocomplete="off" method="POST" action="{% url 'lower_check' testname=test.url %}">
+  {% csrf_token %} {% comment %} GAPS {% endcomment %} {% if type == 'gaps' %}
+
+  <ol>
+    {% for sentence in test.sentences %}
+    <li class="test-line">
+      {% for word in sentence.split %} {% if word == '_' %}
+      <input type="text" name="answer{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}" size="{{test.input_size}}" />
+      {% else %} {{ word|safe }} {% endif %} {% endfor %}
+    </li>
+    <hr class="hr-faint" />
+    {% endfor %}
+  </ol>
+
+  {% comment %} INSIDE_DROPDOWN {% endcomment %} {% elif type == "inside_dropdown" %}
+
+  <ol>
+    {% for sentence, options in listening_task %}
+    <li class="test-line">
+      {% for word in sentence.split %} {% if word == '_' %}
+      <select required name="answer{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+        <option value="no answer"></option>
+        {% for option in options %}
+        <option value="{{option}}">{{ option }}</option>
+        {% endfor %}
+      </select>
+      {% else %} {{ word|safe }} {% endif %} {% endfor %}
+    </li>
+    <hr class="hr-faint" />
+    {% endfor %}
+  </ol>
+
+  {% comment %} GAPS_TEXT {% endcomment %} {% elif type == "gaps_text" %}
+
+  <hr class="hr-faint" />
+  {% for sentence in test.sentences %} {% for word in sentence.split %} {% if word == '_' %}
+  <input type="text" name="answer{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}" size="{{test.input_size}}" />
+  {% else %} {{ word|safe }} {% endif %} {% endfor %} {% endfor %}
+  <hr class="hr-faint" />
+
+  {% comment %} INSIDE_DROPDOWN_TEXT {% endcomment %} {% elif type == "inside_dropdown_text" %}
+
+  <hr class="hr-faint" />
+  {% for sentence, options in listening_task %} {% for word in sentence.split %} {% if word == '_' %}
+  <select required name="answer{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+    <option value="no answer"></option>
+    {% for option in options %}
+    <option value="{{option}}">{{ option }}</option>
+    {% endfor %}
+  </select>
+  {% else %} {{ word|safe }} {% endif %} {% endfor %} {% endfor %}
+  <hr class="hr-faint" />
+
+  {% comment %} LISTENING_DROPDOWN, MANY_DROPDOWN {% endcomment %} {% elif type == 'many_dropdown' %}
+
+  <ol>
+    {% for sentence, options in listening_task %}
+    <li class="test-line">{{sentence|safe}}</li>
+    <select required name="answer_{{ forloop.counter0 }}">
+      <option value="no answer"></option>
+      {% for option in options %}
+      <option value="{{option}}">{{ option }}</option>
+      {% endfor %}
+    </select>
+    <hr class="hr-faint" />
+    {% endfor %}
+  </ol>
+
+  {% comment %} single,dropdown {% endcomment %} {% elif type == 'single_dropdown' %}
+
+  <ol>
+    {% for sentence in test.sentences %}
+    <li class="test-line">{{sentence|safe}}</li>
+    <select required name="answer_{{ forloop.counter0 }}">
+      <option value="no answer"></option>
+      {% for option in test.options %}
+      <option value="{{option}}">{{ option }}</option>
+      {% endfor %}
+    </select>
+    <hr class="hr-faint" />
+    {% endfor %}
+  </ol>
+
+  {% comment %} single_inside_dropdown {% endcomment %} {% elif type == 'single_inside_dropdown' %}
+
+  <ol>
+    {% for sentence in test.sentences %}
+    <li class="test-line">
+      {% for word in sentence.split %} {% if word == '_' %}
+      <select required name="answer{{ forloop.parentloop.counter0 }}_{{ forloop.counter0 }}">
+        <option value="no answer"></option>
+        {% for option in test.options %}
+        <option value="{{option}}">{{ option }}</option>
+        {% endfor %}
+      </select>
+      {% else %} {{ word|safe }} {% endif %} {% endfor %}
+    </li>
+    <hr class="hr-faint" />
+    {% endfor %}
+  </ol>
+
+  {% endif %}
+
+  <div class="margin-top">
+    <button class="button" type="submit">Submit</button>
+  </div>
+</form>
+{% endblock %}

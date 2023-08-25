@@ -1,0 +1,10 @@
+{% extends "website/layout.html" %} {% block title %}Пробники ЕГЭ{% endblock %} {% load static %} {% block body %}
+<h2>State Exam Tests</h2>
+
+<ol>
+  {% for test in ege_tests %}
+  <a href="{% url 'ege_single_test' ege_testname=test.ege_testname %}"><li class="one-line">{{test.ege_testname}}</li></a>
+  {% endfor %}
+</ol>
+
+{% endblock %}

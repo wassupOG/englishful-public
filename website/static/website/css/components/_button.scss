@@ -1,0 +1,6 @@
+@import '../utilities/variables';
+@import '../utilities/mixins';
+
+.btn-small-x {
+    @include btn($btn-border-radius, $btn-font-size, $btn-background)
+}

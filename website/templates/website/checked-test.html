@@ -1,0 +1,57 @@
+{% extends "website/layout.html" %} {% block title %}Результат{% endblock %} {% load static %} {% block body %} {% if test.task %}
+<div class="info info-smaller">{{test.task|safe}}</div>
+{% endif %} {% if test.theory %}
+<div style="margin-top: 20px; margin-bottom: 20px" class="flex-center">
+  <a class="theory-glow" target="”_blank”" href="{{test.theory.url}}">{{test.theory.title}}<span class="emoji-margin">🔗</span></a>
+</div>
+{% endif %} {% if test.picture %}
+<div class="center">
+  <img class="tests-image" src="{% static 'website/images/tasks/' %}{{test.picture}}" />
+</div>
+{% endif %} {% if test.audio_path %}
+<div class="center-grid">
+  <audio src="{% static 'website/audio/tasks/' %}{{test.audio_path}}" controls preload="auto"></audio>
+</div>
+{% endif %} {% if test.text %}
+<hr class="hr-faint" />
+<div class="td-basic">{{test.text|safe}}</div>
+<hr class="hr-faint" />
+{% endif %} {% comment %} Color for the answer {% endcomment %} {% for message in messages %}
+<div class="info fancy-shadow margin-top">
+  Your score is
+  <b class="{% if score_percent >= 80 %}good{% elif score_percent >= 50 %}sat{% else %}bad{% endif %}_grade">{{message}}</b>
+</div>
+{% endfor %} {% if test.script %}
+<div class="folder folder-tablet center-basic fancy-shadow margin-top">Текст аудирования</div>
+<div class="collapsible">
+  <div class="info-left smaller">{{test.script|safe}}</div>
+</div>
+{% endif %} {% if test.type.type == "inside_dropdown_text" or test.type.type == "gaps_text" %}
+<hr class="hr-faint" />
+{% for answer in answers %} {{answer|safe}} {% endfor %}
+<hr class="hr-faint" />
+
+{% elif test.explanation %}
+<ol>
+  {% for answer, explanation in explained %} {% if "class='wrong-answer'" in answer %}
+  <li class="test-line wrong-li">{{answer|safe}} ❌</li>
+  <div class="test-explained">➡️ {{explanation}}</div>
+  {% else %}
+  <li class="test-line">{{answer|safe}} ✅</li>
+  {% endif %}
+  <hr class="hr-faint" />
+  {% endfor %}
+</ol>
+
+{% else %}
+<ol>
+  {% for answer in answers %} {% if "class='wrong-answer'" in answer %}
+  <li class="test-line wrong-li">{{answer|safe}} ❌</li>
+  {% else %}
+  <li class="test-line">{{answer|safe}} ✅</li>
+  {% endif %}
+  <hr class="hr-faint" />
+  {% endfor %}
+</ol>
+
+{% endif %} {% endblock %}

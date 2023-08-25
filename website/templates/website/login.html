@@ -1,0 +1,47 @@
+{% extends "website/layout.html" %} {% block title %}Авторизация{% endblock %} {% load static %} {% block body %}
+<style>
+  footer {
+    background: rgba(64, 64, 64, 0.45);
+    font-weight: bold;
+    border-color: #777;
+  }
+
+  .logo-nav {
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .hr-faint {
+    border-top: 1px solid #999;
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  a: hover {
+    color: white;
+  }
+</style>
+
+<body class="login-pic">
+  {% if message %}
+  <div class="error">{{ message }}</div>
+  {% endif %}
+  <form class="flexbox-column" action="{% url 'login' %}" method="post">
+    {% csrf_token %}
+    <div class="login-plate flexbox-column-center">
+      <h2>Вход</h2>
+
+      <div>
+        <input autocomplete="off" class="login-input" autofocus type="text" name="username" placeholder="Username" />
+      </div>
+
+      <div>
+        <input class="login-input" type="password" name="password" placeholder="Password" />
+      </div>
+
+      <input id="login-button" class="button" type="submit" value="Войти" />
+    </div>
+  </form>
+</body>
+{% endblock %}

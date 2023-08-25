@@ -1,0 +1,18 @@
+@mixin btn($radius, $font-size, $background) {
+    border-radius: $radius;
+    font-size: $font-size;
+    background-color: $background;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:active {
+        transform: translateY(1px);
+    }
+
+    @media all and (max-width: 480px) {
+        background-color: red;
+    }
+}
