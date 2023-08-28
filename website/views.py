@@ -776,7 +776,7 @@ def results(request):
             
             ### SET
             if action == 'set':
-                if form.is_valid() and user.id == 1:
+                if form.is_valid() and user.id == 45:
                     form.save()
                     return HttpResponseRedirect(reverse("results"))
                 elif form_teacher.is_valid():
@@ -785,7 +785,7 @@ def results(request):
 
             ### SHOW
             elif action == 'show':
-                if form_plan.is_valid() and user.id == 1:
+                if form_plan.is_valid() and user.id == 45:
                     selected_user = form_plan.cleaned_data['users_show']
                     selected_user = selected_user.id
                     student_gpa = Results.objects.filter(user_id = selected_user).aggregate(Avg('grade'))

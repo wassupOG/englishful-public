@@ -1,19 +1,19 @@
 "use strict";
 import { clearFormatting, editContents, selectAll } from "./adminDictionary.js";
-import { manageLandingButtons, showPopup, closePopup, hashLoad } from "./index.js";
+import { manageLandingButtons, showPopup, closePopup, hashLoad } from "./landingPage.js";
 import { fold, updateGrades, preventSubmit, foldTable } from "./tests.js";
-import { sayWord, speechSynthesis, trainCards } from "./userDictionary.js";
+import { sayUtterance, setupSpeechSynthesis, trainCards } from "./userDictionary.js";
 
 // Logo click
 document.getElementById("logo").addEventListener("click", () => (window.location.href = "/"));
 
-// Load sections
+// Load hashed sections
 hashLoad();
 
-// Buttons landing
+// Managing buttons & displaying sections corresponding to them
 manageLandingButtons();
 
-// POPUPS
+// POPUPS: show & close
 showPopup();
 closePopup();
 
@@ -23,17 +23,17 @@ fold();
 // Folding Study Plan Table
 foldTable();
 
-// Form submission
+// Prevent accidental form submissions & window unloading events
 preventSubmit();
 
-// Edit marks
+// Edit grades in teacher profile
 updateGrades();
 
 // Dictionary
 if (window.location.href.includes("dictionary")) {
   trainCards();
-  sayWord();
-  speechSynthesis();
+  sayUtterance();
+  setupSpeechSynthesis();
   clearFormatting();
   editContents();
   selectAll();

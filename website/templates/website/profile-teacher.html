@@ -19,7 +19,7 @@
             {% csrf_token %}
             <div class="center-basic">
             
-            {% if request.user.id == 1 or request.user.id == 45 %}
+            {% if request.user.id == 45 %}
                 {{ form }}
             {% elif request.user.teacher == True%}
                 {{form_teacher}}
@@ -34,7 +34,7 @@
     <form method="post">
         {% csrf_token %}
         <div class="center-basic">
-            {% if request.user.id == 1 or request.user.id == 45 %}
+            {% if request.user.id == 45 %}
                 {{form_plan}}
             {% elif request.user.teacher == True%}
                 {{form_plan_teacher}}
@@ -151,7 +151,7 @@
 
 
 {% comment %} ADMIN EGE CHECK (for me) {% endcomment %}
-{% if request.user.id == 1 or request.user.id == 45 %}
+{% if request.user.id == 45 %}
 
     {% if results_speaking %}
         <h3>Urgent❗</h3>

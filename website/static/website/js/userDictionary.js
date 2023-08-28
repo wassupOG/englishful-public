@@ -102,17 +102,17 @@ export function trainCards() {
   }
 }
 
-export function sayWord() {
+export function sayUtterance() {
   const speechIcons = document.querySelectorAll("[data-say-word]");
   speechIcons.forEach((icon) => {
     const context = icon.previousElementSibling.textContent.replace(/['"\\]/g, "");
     icon.addEventListener("click", () => {
-      speechSynthesis(context);
+      setupSpeechSynthesis(context);
     });
   });
 }
 
-export function speechSynthesis(text) {
+export function setupSpeechSynthesis(text) {
   const synth = window.speechSynthesis;
   const utterance = new SpeechSynthesisUtterance(text);
   utterance.pitch = 1;

@@ -3,21 +3,23 @@ const LANDING_SECTIONS = document.querySelectorAll('[data-type="landingSection"]
 const PRICING_SECTIONS = document.querySelectorAll('[data-type="pricingSection"]');
 const LANDING_BUTTONS = document.querySelectorAll('[data-type="landingButton"]');
 const PRICING_BUTTONS = document.querySelectorAll('[data-type="pricingButton"]');
+const overlay = document.querySelector("#overlay");
 export const BUTTONS = [...LANDING_BUTTONS, ...PRICING_BUTTONS];
 
-// Manage class of buttons
+// * Parent function combining adding & removing class from buttons + showing sections.
 export function manageLandingButtons() {
   if (!BUTTONS || BUTTONS.length === 0) return;
 
   BUTTONS.forEach((button) => {
     button.addEventListener("click", (event) => {
-      landingButtonRemoveClass(event);
+      buttonsRemoveAddClass(event);
       landingShowSection(button.dataset.corresponding, button.dataset.type);
     });
   });
 }
 
-export function landingButtonRemoveClass(event) {
+// * First removing then adding active class to buttons based on their type: landing buttons (main buttons at top) or secondary pricing buttons.
+export function buttonsRemoveAddClass(event) {
   if (event.target.dataset.type === "landingButton") {
     LANDING_BUTTONS.forEach((button) => button.classList.remove("active"));
     event.target.classList.add("active");
@@ -27,6 +29,7 @@ export function landingButtonRemoveClass(event) {
   }
 }
 
+// * Showing the section corresponding to a button type (landing buttons or pricing buttons).
 export function landingShowSection(sectionID, buttonType) {
   if (buttonType === "landingButton") {
     LANDING_SECTIONS.forEach((section) => (section.style.display = "none"));
@@ -40,7 +43,7 @@ export function landingShowSection(sectionID, buttonType) {
   window.scrollTo({ top: offset, behavior: "smooth" });
 }
 
-// hash
+//* Load hashed sections on landing page (if any)
 export function hashLoad() {
   window.addEventListener("load", () => {
     const hash = window.location.hash;
@@ -56,9 +59,7 @@ export function hashLoad() {
   });
 }
 
-// Popups
-const overlay = document.querySelector("#overlay");
-
+//* Show the popup
 export function showPopup() {
   const popupButtons = document.querySelectorAll(["[data-target-popup]"]);
   popupButtons.forEach((button) => {
@@ -71,6 +72,7 @@ export function showPopup() {
   });
 }
 
+//* Close the popup
 export function closePopup() {
   const closeButtons = document.querySelectorAll(["[data-close-button]"]);
   closeButtons.forEach((button) => {
