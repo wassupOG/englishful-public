@@ -8,8 +8,8 @@ This is an online platform that simplifies teaching & learning english by doing 
 
 ### Feel free to test the project's capabilities in production!
 * [Login link](https://englishful.ru/login)
-* Login: student
-* Password: student
+* Login: **student**
+* Password: **student**
 
 ## 🌟 Main Features 🌟
 * 📱 Responsive mobile-friendly design. The website looks just like a mobile app from a smartphone.
