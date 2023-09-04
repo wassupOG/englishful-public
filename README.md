@@ -5,6 +5,12 @@ This is an online platform that simplifies teaching & learning english by doing 
 2. You can assign students to groups.
 3. You can create staff (teacher) accounts and assign students to these teachers. There are also master accounts (superusers) that have extended capabilities than the ones of teachers.
 4. Students can solve tests, add words to their dictionary, train words via flashcards, listen to word pronunciations, browse through their study plan & more....
+
+### Feel free to test the project's capabilities in production!
+* [Login link](https://englishful.ru/login)
+* Login: student
+* Password: student
+
 ## 🌟 Main Features 🌟
 * 📱 Responsive mobile-friendly design. The website looks just like a mobile app from a smartphone.
 * 🙋 Personalized profile with GPA, test results, CEFR lvl & progress scale, and more.
