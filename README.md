@@ -31,16 +31,16 @@ This is an online platform that simplifies teaching & learning english by doing 
 >> * login: student_number_two / password: student#2 - example student #2.
 
 ## &#128194; Entry Points &#128194;
-1. requirements.txt - project requirements.
-2. db.sqlite3 - database.
-3. website\static - all static files like css, images, js, etc.
-4. website\static\website\js\main.js - main JavaScript file.
-5. website\templates - html pages.
-6. website\views.py - main backend logic.
-7. website\urls.py - routing.
-8. website\models.py - database configuration.
-9. website\admin.py - admin panel tuning.
-10. scuh\settings.py - project settings.
+1. [requirements.txt](https://github.com/wassupOG/englishful-public/blob/main/requirements.txt) - project requirements.
+2. [db.sqlite3](https://github.com/wassupOG/englishful-public/blob/main/db.sqlite3) - database.
+3. [website\static](https://github.com/wassupOG/englishful-public/tree/main/website/static/website) - all static files like css, images, js, etc.
+4. [website\static\website\js\main.js](https://github.com/wassupOG/englishful-public/blob/main/website/static/website/js/main.js) - main JavaScript file.
+5. [website\templates](https://github.com/wassupOG/englishful-public/tree/main/website/templates/website) - html pages.
+6. [website\views.py](https://github.com/wassupOG/englishful-public/blob/main/website/views.py) - main backend logic.
+7. [website\urls.py](https://github.com/wassupOG/englishful-public/blob/main/website/urls.py) - routing.
+8. [website\models.py](https://github.com/wassupOG/englishful-public/blob/main/website/models.py) - database configuration.
+9. [website\admin.py](https://github.com/wassupOG/englishful-public/blob/main/website/admin.py) - admin panel tuning.
+10. [scuh\settings.py](https://github.com/wassupOG/englishful-public/blob/main/scuh/settings.py) - project settings.
 
 ## ❗Important❗
 * If you actually get your hands on this projects and think that it is usefull for learning / teaching english you can contact me and consult on the topic of adding tests, theory topics & just managing the website through the admin panel.
